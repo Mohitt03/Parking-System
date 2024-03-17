@@ -5,10 +5,10 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cookiePaser = require("cookie-parser");
 
-const Blog = require("./models/blog");
+// const Blog = require("./models/blog");
 
 const userRoute = require("./routes/user");
-const blogRoute = require("./routes/blog");
+const blogRoute = require("./routes/parking");
 
 const {
   checkForAuthenticationCookie,
@@ -30,14 +30,12 @@ app.use(checkForAuthenticationCookie("token"));
 app.use(express.static(path.resolve("./public")));
 
 app.get("/", async (req, res) => {
-  const allBlogs = await Blog.find({});
   res.render("home", {
-    user: req.user,
-    blogs: allBlogs,
+    user: req.user
   });
 });
 
 app.use("/user", userRoute);
-app.use("/blog", blogRoute);
+// app.use("/blog", blogRoute);
 
 app.listen(PORT, () => console.log(`Server Started at PORT:${PORT}`));

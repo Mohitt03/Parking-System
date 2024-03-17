@@ -1,0 +1,161 @@
+/* Importing Google font - Open Sans */
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap");
+
+body {
+    background-color: aliceblue;
+    font-family: sans-serif;
+}
+/* Section 1 */
+
+
+.sec1-div1{
+    display: flex;
+    justify-content: center;
+    margin-top: 136px;}
+
+
+.sec1-div2{
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    min-width: 823px;
+    padding: 0px 100px 0px 100px;
+    justify-content: center;
+    background-color: aliceblue;
+    border: 2px solid deepskyblue;
+}
+.sec1-div1-h1{
+    font-size: 41px;
+    /* padding: 0px 0px 100px 0px; */
+    position: relative;
+    /* top: 37px; */
+}
+.sec1-div1-h2{
+    /* padding: 0px 0px 10px 0px; */
+    position: relative;
+    top: 21px;
+    font-size: 30px;
+}
+.sec1-div1-p{
+    /* padding: 0px 0px 5px 0px; */
+    position: relative;
+    top: 28px;
+    font-size: 20px;
+}
+.sec1-div1-h3{
+    display: flex;
+    align-items: center;
+}
+.sec1-div1-h3-a{
+    color: orange;
+}
+.link2{
+    position: relative;
+    top: -42px;
+}
+.sec1-div3{
+    display: flex;
+    align-items: center;
+    border: 2px solid deepskyblue;
+    border-left: none;
+}
+.map{
+    width: 387px;
+    height: 336px;
+    padding: 0px 97px;
+}
+
+
+
+
+
+
+
+/* RESPOSIVE */
+
+/* 
+Enrty ====> screen
+1199  ====> 992
+991 ====> 768
+767 ====> 576
+575 ====> 320 */
+
+@media (max-width:1199px) {}
+
+@media (max-width:991px) {
+    .sec1-div1 {
+        display: flex;
+        justify-content: center;
+        margin-top: 0px;
+        flex-direction: column;
+        padding: 24px 119px;
+        }
+    .sec1-div1-h1 {
+        top: 92px;
+        font-size: 37px;
+    }
+    .sec1-div1-h2 {
+        /* padding: 0px 0px 10px 0px; */
+        position: relative;
+        top: 62px;
+        font-size: 25px;
+    }
+    .sec1-div1-p {
+        /* padding: 0px 0px 5px 0px; */
+        position: relative;
+        top: 50px;
+        font-size: 17px;
+    }
+    
+    .sec1-div2 {
+        align-items: center;
+        padding: 0px 0px 0px 0px;
+        border: 2px solid deepskyblue;
+        border-bottom: none;
+        }
+    .sec1-div3 {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid deepskyblue;
+        border-top: none;
+        padding: 33px 0px;
+    }   
+    .map{
+        width: 276px;
+        height: 250px;
+        padding: 0px;   
+    }
+}
+
+@media (max-width:767px) {
+    .sec1-div1 {
+        align-items: center;
+    }
+    .sec1-div2 {
+        display: flex;
+        flex-direction: column;
+        /* align-items: center; */
+        padding: 0px 0px 0px 34px;
+        /* justify-content: center; */
+        width: 300px;
+    }
+    .sec1-div3 {
+        width: 334px;
+    }
+
+
+}
+
+@media (max-width:375px) {
+    .sec1-div2{
+        border: none;
+        padding: 0px;
+        /* width: 0px; */
+
+    }
+    .sec1-div3{
+        border: none;
+        width: 0px;
+    }
+}
