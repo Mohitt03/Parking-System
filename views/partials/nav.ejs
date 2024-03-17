@@ -20,12 +20,12 @@
 
     <% if (locals.user) { %>
       <div class="div-btn">
-        <button class="book nav-btn1 b "><a href="/" class="logout login-btn">LOG OUT</a></button>
+        <button class="book nav-btn1 b "><a href="/user/logout" class="logout login-btn">LOG OUT</a></button>
         <span id="hamburger-btn" class="material-symbols-outlined">menu</span>
       </div>
       <% } else {%>
         <div class="div-btn">
-          <button class="book nav-btn1 b "><a class="logout login-btn" href="/register">Register</a></button>
+          <button class="book nav-btn1 b "><a class="logout login-btn" href="/user/signup">Register</a></button>
           <button class="book nav-btn1 b "><a class="logout login-btn" href="/user/signin">Login</a></button>
           <span id="hamburger-btn" class="material-symbols-outlined">menu</span>
         </div>
