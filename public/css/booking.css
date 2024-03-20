@@ -1,0 +1,89 @@
+.formdiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 129px 0px;
+}
+
+.h1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.form {
+    text-align: center;
+    padding: 30px 40px;
+    background-color: #e4e4e4;
+}
+
+.finput {
+    padding: 10px;
+    margin-right: 5px;
+    border: 2px solid gray;
+}
+
+.flabel {
+    font-weight: 600;
+    font-family: system-ui;
+
+}
+
+.finput1 {
+    padding: 10px;
+}
+
+.finput2 {
+    padding: 10px 22px;
+}
+
+.finput3 {
+    padding: 10px 40px;
+}
+
+.finput4 {
+    padding: 10px 37px;
+}
+
+.finput5 {
+    padding: 10px 22px;
+}
+
+.finput6 {
+    padding: 10px 23px;
+    /* border-bottom: 2px solid gray; */
+}
+
+.finput7 {
+    padding: 10px 7px;
+    border-bottom: 2px solid gray;
+}
+
+.fbtn {
+    margin-top: 10px;
+    padding: 14px 58px;
+    font-size: 17px;
+    background-color: #101010c2;
+    color: white;
+    border: none;
+}
+
+.part1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+
+.part2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+
+.part3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}

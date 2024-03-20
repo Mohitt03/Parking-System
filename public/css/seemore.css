@@ -1,0 +1,103 @@
+/* See More */
+body{
+    font-family: sans-serif;
+    background-color: aliceblue
+}
+.sec1{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 0px;
+    
+}
+.er{
+    height: 623px;
+    background-color: gray;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 10px;
+}
+
+.sec1-div1{
+    /* width: 288px; */
+}
+.img{
+    width: 435px;
+    height: auto;
+    border-radius: 10px;
+}
+.sec1-div2{
+    width: 435px;
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+}
+.securityStar{}
+.Space{}
+.Type{}
+
+.button {
+    width: 100%;
+    /* height: 24px; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn {
+    background-color: gray;
+    width: 105px;
+    height: 43px;
+    border-radius: 7px;
+    font-size: 20px;
+    color: cornsilk;
+    border: none;
+    transition: all 0.375s;
+    cursor: pointer;
+}
+.btn:hover{
+    color: crimson;
+    background-color: cornsilk;
+}
+
+
+
+/* RESPOSIVE */
+
+/* 
+Enrty ====> screen
+1199  ====> 992
+991 ====> 768
+767 ====> 576
+575 ====> 320 */
+
+@media (max-width:1199px) {}
+
+@media (max-width:991px) {}
+
+@media (max-width:767px) {}
+
+@media (max-width:565px) {
+    .sec1 {
+        height: 545px;
+        padding: 23px 0px;
+    }
+    .img {
+        width: 279px;
+        height: auto;
+        /* padding: 1674px 1139px; */
+        border-radius: 10px;
+    }
+    .sec1-div2 {
+        width: 279px;
+        display: flex;
+        flex-direction: column;
+        align-items: baseline;
+    }
+
+}

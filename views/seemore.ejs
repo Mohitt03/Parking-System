@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>See More</title>
+    <link rel="stylesheet" href="\css\seemore.css">
+</head>
+
+<body>
+    <section class="sec1">
+
+        <div class="er">
+            <div class="sec1-div1">
+            </div>
+            <% if (locals.parking) { %>
+                <div class="sec1-div2">
+
+                    <div class="securityStar">
+                        <!-- <h2>Security Star: <%=parking.security_star%>
+                        </h2> -->
+                    </div>
+
+                    <div class="Space">
+                        <h2>Total Spot: <%= parking.total_spot %>
+                        </h2>
+                        <!-- <h2>Available: <%= parking.available %>
+                        </h2>
+                        <h2>Occupied: <%= parking.occupied %>
+                        </h2>
+                        <h2>Available for: <%= parking.type %>
+                        </h2> -->
+                    </div>
+                    <div class="button">
+                        <button class="btn"><a href="/user/booking/<%=parking._id %>" class="">Reserve</a></button>
+                    </div>
+                </div>
+                <% } %>
+
+
+        </div>
+    </section>
+</body>
+
+</html>
