@@ -14,38 +14,46 @@
 <body>
 
     <body>
-        <section class="sec1">
 
-            <% parkings.forEach(parking=> { %>
 
-                <div class="sec1-div1">
+        <% if (parkings.length===0) { %>
+            <h1>Item not found</h1>
+            <% } else { %>                      
+                <section class="sec1">
 
-                    <div class="sec1-div2">
-                        <h1 class="sec1-div1-h1">
-                            Parking <%=parking.parking_number%>
-                        </h1>
-                        <h2 class="sec1-div1-h2">Address</h2>
-                        <p class="sec1-div1-p">
-                            <%=parking.address%>
-                        </p>
-                        <h3 class="sec1-div1-h3"><a class="sec1-div1-h3-a" href="<%=parking.link %>">View
-                                map here </a>
-                            <p>➡️</p>
-                        </h3>
-                        <h3 class="sec1-div1-h3 link2"><a href="/user/seemore/<%=parking._id %>" class="sec1-div1-h3-a">Park
-                                here </a></h3>
-                    </div>
-                    <!-- <div>
+                    <% parkings.forEach(parking=> { %>
+
+                        <div class="sec1-div1">
+
+                            <div class="sec1-div2">
+                                <h1 class="sec1-div1-h1">
+                                    Parking <%=parking.parking_number%>
+                                </h1>
+                                <h2 class="sec1-div1-h2">Address</h2>
+                                <p class="sec1-div1-p">
+                                    <%=parking.address%>
+                                </p>
+                                <h3 class="sec1-div1-h3"><a class="sec1-div1-h3-a" href="<%=parking.link %>">View
+                                        map here </a>
+                                    <p>➡️</p>
+                                </h3>
+                                <h3 class="sec1-div1-h3 link2"><a href="/user/seemore/<%=parking._id %>"
+                                        class="sec1-div1-h3-a">Park
+                                        here </a></h3>
+                            </div>
+                            <!-- <div>
                     <iframe src="<%= parking.iframe_link%>" width="500" height="490" style="border:0;"
                         allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div> -->
 
-                </div>
-                </div>
+                        </div>
+                        </div>
 
-                <% }); %>
+                        <% }); %>
 
-        </section>
+                </section>
+                <% } %>
+
     </body>
 
 </html>
