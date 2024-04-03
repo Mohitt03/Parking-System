@@ -1,0 +1,51 @@
+body {
+    font-family: sans-serif;
+}
+.a{
+    padding: 5px 5px;
+    background-color: aquamarine;
+    text-decoration: none;
+    color: black;
+}
+.a:hover{
+    background-color: aqua;
+}
+
+table,
+th,
+td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 10px;
+}
+
+td {
+    max-width: 217px;
+    overflow-x: scroll;
+}
+tr{
+    max-height: 100px;
+    overflow-y: scroll;
+
+}
+
+.btn {
+    position: absolute;
+    left: 1263px;
+    top: 110px;
+}
+
+.overflow {
+    width: 500px;
+    height: auto;
+    overflow: scroll;
+}
+.breif{
+    height: 44px;
+    overflow-y: hidden;
+    width: 243px;
+}

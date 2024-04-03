@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 var Parking = new Schema({
+
     parking_number: {
         type: Number,
         required: true
@@ -20,6 +21,26 @@ var Parking = new Schema({
     total_spot: {
         type: Number,
         required: true
+    },
+    Opening_Times: {
+        type: String,
+        required: true
+    },
+    Closing_Times: {
+        type: String,
+        required: true
+    },
+    Price: {
+        type: Number,
+        required: true
+    },
+    Reservation_Price: {
+        type: Number,
+        required: true
+    },
+    Features: {
+        type: String,
+        default: "No height restrictions",
     }
 },
     {

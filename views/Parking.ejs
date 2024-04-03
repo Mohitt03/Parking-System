@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/Admin.css">
+</head>
+
+<body>
+
+    <!-- Navbar  Section -->
+
+
+
+    <!-- 
+    <a class="a" href="/Reservation">Reservation</a>
+    <br><a class="a" href="/users">Users</a> -->
+
+
+
+
+
+    <table>
+        <tr>
+            <th>Parking Number</th>
+            <th>ID</th>
+            <th>Address</th>
+            <th>Map Link</th>
+            <th>Iframe link</th>
+            <th>Total Spot</th>
+            <th>CreatedAt</th>
+            <th>UpdatedAt</th>
+            <th><a href="/admin/create">Create Parking</a></th>
+        </tr>
+        <% datas.forEach(data=> { %>
+            <tr>
+                <td>
+                    <%= data.parking_number %>
+                </td>
+                <td>
+                    <%= data._id %>
+                </td>
+                <td>
+                    <%= data.address %>
+                </td>
+                <td>
+                    <%= data.link %>
+                </td>
+
+                <td>
+                    <%= data.iframe_link %>
+                </td>
+                <td>
+                    <%= data.total_spot %>
+                </td>
+                <td>
+                    <%= data.createdAt %>
+                </td>
+                <td>
+                    <%= data.updatedAt %>
+                </td>
+                <td>
+                    <a class="delete" href="/admin/parking/<%= data._id %>">Delete</a>
+                    <br>
+                    <a class="delete" href="/admin/edit/<%= data._id %>">Edit</a>
+                </td>
+            </tr>
+
+            <% }); %>
+
+    </table>
+</body>
+
+</html>

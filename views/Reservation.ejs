@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/Admin.css">
+</head>
+
+<body>
+    <table>
+        <tr>
+            <th>Username</th>
+            <th>ID</th>
+            <th>Spot</th>
+            <th>Date</th>
+            <th>Address</th>
+            <th>Entry_time</th>
+            <th>Exit_time</th>
+        </tr>
+        <% datas.forEach(data=> { %>
+            <tr>
+                <td>
+                    <%= data.Username %>
+                </td>
+                <td>
+                    <%= data._id %>
+                </td>
+                <td>
+                    <%= data.spot %>
+                </td>
+                <td>
+                    <%= data.date %>
+                </td>
+                <td>
+                    <%= data.address %>
+                </td>
+                <td>
+                    <%= data.Entry_time %>
+                </td>
+                <td>
+                    <%= data.Exit_time %>
+                </td>
+                <td><a class="delete" href="/admin/reservation/<%= data._id %>">Delete</a></td>
+            </tr>
+
+            <% }); %>
+
+    </table>
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale  =1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="/css/createparking.css">
+</head>
+
+<body>
+  <div class="container">
+    <h1>
+      <%= heading %>
+    </h1>
+
+    <% if (locals.parking) { %>
+      <form id="newPostForm" action="/admin/edit/<%= parking._id %>" method="post">
+        <input type="text" name="parking_number" placeholder="Parking number" value="<%= parking.parking_number %>">
+        <input type="text" name="address" placeholder="Address" input value="<%= parking.address %>">
+        <input type="text" name="link" placeholder="Map Link" value="<%= parking.link %>">
+        <input type="text" name="iframe_link" placeholder="Iframe link" value="<%= parking.iframe_link %>">
+        <input type="text" name="total_spot" placeholder="Total spot" value="<%= parking.total_spot %>">
+        <input type="text" name="Opening_Times" placeholder="Opening Times" value="<%= parking.Opening_Times %>">
+        <input type="text" name="Closing_Times" placeholder="Closing Times" input value="<%= parking.Closing_Times %>">
+        <input type="text" name="Price" placeholder="Price" value="<%= parking.Price %>">
+        <input type="text" name="Reservation_Price" placeholder="Reservation Price" value="<%= parking.Reservation_Price %>">
+        <input type="text" name="Features" placeholder="Features spot" value="<%= parking.Features %>">
+        <button class="full-width" type="submit">
+          <%= submit %>
+        </button>
+      </form>
+      <% } else{%>
+        <form id="newPostForm" action="/admin/create" method="post">
+
+          <input type="text" name="parking_number" placeholder="Parking number">
+          <input type="text" name="address" placeholder="Address" input>
+          <input type="text" name="link" placeholder="Map Link">
+          <input type="text" name="iframe_link" placeholder="Iframe link">
+          <input type="text" name="total_spot" placeholder="Total spot">
+          <input type="text" name="Opening_Times" placeholder="Opening Times">
+          <input type="text" name="Closing_Times" placeholder="Closing Times" input>
+          <input type="text" name="Price" placeholder="Price">
+          <input type="text" name="Reservation_Price" placeholder="Reservation Price">
+          <input type="text" name="Features" placeholder="Features spot">
+          <button class="full-width" type="submit">
+            <%= submit %>
+          </button>
+        </form>
+        <% } %>
+  </div>
+
+</body>
+
+</html>

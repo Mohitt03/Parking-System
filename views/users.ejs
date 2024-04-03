@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/Admin.css">
+</head>
+
+<body>
+    <table>
+        <tr>
+            <th>Username</th>
+            <th>ID</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th>CreatedAt</th>
+            <th>UpdatedAt</th>
+        </tr>
+        <% datas.forEach(data=> { %>
+            <tr>
+                <td>
+                    <%= data.username %>
+                </td>
+                <td>
+                    <%= data._id %>
+                </td>
+                <td>
+                    <%= data.email %>
+                </td>
+                <td>
+                    <%= data.password %>
+                </td>
+                <td>
+                    <%= data.createdAt %>
+                </td>
+                <td>
+                    <%= data.updatedAt %>
+                </td>
+                <td><a class="delete" href="/admin/users/<%= data._id %>">Delete</a></td>
+            </tr>
+
+            <% }); %>
+
+    </table>
+</body>
+
+</html>
