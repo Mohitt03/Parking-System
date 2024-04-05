@@ -30,9 +30,10 @@ router.get("/signup", (req, res) => {
 
 router.get("/Availibility", async (req, res) => {
 
-  try { 
+  try {
     const search = req.query.search || "";
     const park = await Parking.find({ address: { $regex: search, $options: "i" } })
+    console.log(park);
     return res.render("Availibility", { parkings: park });
   } catch (err) {
     console.log(err);
