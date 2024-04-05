@@ -11,6 +11,35 @@ router.get("/admin", (req, res) => {
     return res.render("Admin");
 });
 
+router.get("/admin2", (req, res) => {
+    return res.render("Admin2");
+});
+
+router.get("/user-Profile", (req, res) => {
+    return res.render("users-profile");
+});
+
+router.get("/pages-faq", (req, res) => {
+    return res.render("pages-faq");
+});
+
+router.get("/pages-contact", (req, res) => {
+    return res.render("pages-contact");
+});
+
+router.get("/pages-register", (req, res) => {
+    return res.render("pages-register");
+});
+
+router.get("/pages-login", (req, res) => {
+    return res.render("pages-login");
+});
+
+router.get("/pages-blank", (req, res) => {
+    return res.render("pages-blank");
+});
+
+
 // Reservations
 
 router.get("/reservation", async (req, res) => {
