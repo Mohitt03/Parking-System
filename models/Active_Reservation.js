@@ -1,8 +1,15 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-var Parking = new Schema({
-
-    parking_number: {
+var Parking_Reservation = new Schema({
+    Username: {
+        type: String,
+        required: true
+    },
+    Email: {
+        type: String,
+        required: true
+    },
+    spot: {
         type: Number,
         required: true
     },
@@ -10,37 +17,25 @@ var Parking = new Schema({
         type: String,
         required: true
     },
-    link: {
+    date: {
         type: String,
         required: true
     },
-    iframe_link: {
+    Arriving: {
         type: String,
         required: true
     },
-    total_spot: {
-        type: Number,
-        required: true
-    },
-    Opening_Times: {
-        type: Number,
-        required: true
-    },
-    Closing_Times: {
-        type: Number,
+    Leaving: {
+        type: String,
         required: true
     },
     Price: {
         type: Number,
         required: true
     },
-    Reservation_Price: {
-        type: Number,
-        required: true
-    },
-    Features: {
+    Time: {
         type: String,
-        default: "No height restrictions",
+        required: true
     }
 },
     {
@@ -48,4 +43,4 @@ var Parking = new Schema({
     }
 )
 
-module.exports = mongoose.model('Parking', Parking)
+module.exports = mongoose.model('Parking_Reservation', Parking_Reservation)

@@ -3,7 +3,7 @@ const { Router } = require("express");
 axios = require("axios")
 
 const Parking = require("../models/Parking");
-const Reservation = require("../models/Reservation");
+const Reservation = require("../models/Active_Reservation");
 const User = require("../models/user")
 const router = Router();
 
@@ -11,9 +11,6 @@ router.get("/admin", (req, res) => {
     return res.render("Admin");
 });
 
-router.get("/admin2", (req, res) => {
-    return res.render("Admin2");
-});
 
 router.get("/user-Profile", (req, res) => {
     return res.render("users-profile");
@@ -57,7 +54,7 @@ router.get('/reservation/:id', async (req, res) => {
         if (!reservation) {
             return res.status(404).json({ message: 'Not found' });
         }
-        return res.redirect("/admin/reservation")
+        return res.redirect("/admin/admin")
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -83,7 +80,7 @@ router.get('/users/:id', async (req, res) => {
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
-        return res.redirect("/admin/users")
+        return res.redirect("/admin/admin")
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -159,12 +156,42 @@ router.get('/parking/:id', async (req, res) => {
         if (!parking) {
             return res.status(404).json({ message: 'User not found' });
         }
-        return res.redirect("/admin/parking")
+        return res.redirect("/admin/admin")
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 
 })
 
+// Admin Data
+
+
+const date = new Date();
+
+let day = date.getDate();
+let month = date.getMonth() + 1;
+let year = date.getFullYear();
+
+let currentDate = `${day}-${month}-${year}`;
+console.log(currentDate);
+
+router.get("/admin2", async (req, res) => {
+
+    const user = await User.find()
+    const parking = await Parking.find()
+    const reservation = await Reservation.find()
+    const numberStr = `${currentDate}`;
+
+    // const search = req.query.search || "";
+    const booking = await Reservation.findOne({ date: currentDate })
+    console.log(booking);
+
+    return res.render("Admin2", {
+        users: user,
+        parkings: parking,
+        reservations: reservation
+    });
+
+});
 
 module.exports = router;

@@ -1,14 +1,12 @@
-/**
-* Template Name: NiceAdmin
-* Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-* Updated: Mar 17 2024 with Bootstrap v5.3.3
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
+/* Display None */
+.none {
+  display: none;
+}
 
-/*--------------------------------------------------------------
-# General
---------------------------------------------------------------*/
+.center {
+  justify-content: center;
+}
+
 :root {
   scroll-behavior: smooth;
 }
@@ -58,6 +56,9 @@ h6 {
 --------------------------------------------------------------*/
 .pagetitle {
   margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+align-items: center;
 }
 
 .pagetitle h1 {
@@ -395,8 +396,7 @@ h6 {
 }
 
 .header .search-bar {
-  min-width: 360px;
-  padding: 0 20px;
+  display: none;
 }
 
 @media (max-width: 1199px) {
@@ -1214,6 +1214,7 @@ h6 {
 # Footer
 --------------------------------------------------------------*/
 .footer {
+  display: none;
   padding: 20px 0;
   font-size: 14px;
   transition: all 0.3s;

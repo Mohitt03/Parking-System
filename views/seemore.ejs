@@ -12,31 +12,72 @@
     <section class="sec1">
 
         <div class="er">
+
+            <!-- Head Section -->
+
             <div class="sec1-div1">
+                <div class="head1">
+                    <h2 class="">
+                        <%=parking.address%>
+                    </h2>
+                </div>
+
             </div>
-            <% if (locals.parking) { %>
-                <div class="sec1-div2">
 
-                    <div class="securityStar">
-                        <!-- <h2>Security Star: <%=parking.security_star%>
-                        </h2> -->
+
+            <!-- Middle  Section -->
+
+            <div class="sec1-div2">
+
+
+                <div class="inner-head-div2">
+                    <div>
+                        <p class="sec1-div1-p">
+                            ₹<%=parking.Reservation_Price%><br>
+                                1 hours
+                        </p>
                     </div>
 
-                    <div class="Space">
-                        <h2>Total Spot: <%= parking.total_spot %>
-                        </h2>
-                        <!-- <h2>Available: <%= parking.available %>
-                        </h2>
-                        <h2>Occupied: <%= parking.occupied %>
-                        </h2>
-                        <h2>Available for: <%= parking.type %>
-                        </h2> -->
-                    </div>
-                    <div class="button">
-                        <a href="/user/booking/<%=parking._id %>" class=""><button class="btn">Reserve</button></a>
+                    <div>
+                        <div class="button">
+                            <a href="/user/booking/<%=parking._id %>" class=""><button class="btn">Reserve</button></a>
+                        </div>
                     </div>
                 </div>
-                <% } %>
+                <div>
+                    <h2 class="">
+                        <%=parking.address%>
+                    </h2>
+                </div>
+
+                <div>
+                    <div>
+                        <h2>Features</h2>
+                    </div>
+                    <div>
+                        <%=parking.Features%>
+                    </div>
+                </div>
+
+                <div>
+                    <div>
+                        <h3>Opening Times</h3>
+                    </div>
+                    <div>
+                        <h4>
+                            Mon-Sun__________________<p><%=parking.Opening_Times%>-<%=parking.Closing_Times%></p>
+
+                        </h4>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- End Section -->
+
+        </div>
+
 
 
         </div>

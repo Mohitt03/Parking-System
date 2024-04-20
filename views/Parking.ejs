@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Park My Spot</title>
     <link rel="stylesheet" href="/css/Admin.css">
 </head>
 
@@ -32,6 +32,11 @@
             <th>Total Spot</th>
             <th>CreatedAt</th>
             <th>UpdatedAt</th>
+            <th>Opening Times</th>
+            <th>Closing Times</th>
+            <th>Price</th>
+            <th>Reservation Price</th>
+            <th>Features</th>
             <th><a href="/admin/create">Create Parking</a></th>
         </tr>
         <% datas.forEach(data=> { %>
@@ -60,6 +65,22 @@
                 </td>
                 <td>
                     <%= data.updatedAt %>
+                </td>
+
+                <td>
+                    <%= data.Opening_Times %>
+                </td>
+                <td>
+                    <%= data.Closing_Times %>
+                </td>
+                <td>
+                    <%= data.Price %>
+                </td>
+                <td>
+                    <%= data.Reservation_Price %>
+                </td>
+                <td>
+                    <%= data.Features %>
                 </td>
                 <td>
                     <a class="delete" href="/admin/parking/<%= data._id %>">Delete</a>

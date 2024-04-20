@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <section>
+        <div>
+            <h1>
+                <%= TotalPrice %>
+            </h1>
+            <h1>
+                <%= TotalTime %>
+            </h1>
+            <h1>
+                <%= MainArriving %>
+            </h1>
+            <h1>
+                <%= MainLeaving %>
+            </h1>
+            <h1>
+                <%= Date %>
+            </h1>
+            <h1>
+                <%= Spot %>
+            </h1>
+            <h1>
+                <%= address %>
+            </h1>
+            <h1>
+                <%= email %>
+            </h1>
+            <button type="submit" onclick="book()">Submit</button>
+
+            <form class="form" action="/user/Booking" method="post">
+                <input name="Price" value="<%= TotalPrice %>" type="text">
+                <input name="Time" value="<%= TotalTime %>" type="text">
+                <input name="Arriving" value="<%= MainArriving %>" type="text">
+                <input name="Leaving" value="<%= MainLeaving %>" type="text">
+                <input name="date" value="<%= Date %>" type="text">
+                <input name="spot" value="<%= Spot %>" type="text">
+                <input name="address" value="<%= address %>" type="text">
+                <input name="Username" type="text">
+                <input name="Email" value="<%= email %>" type="email">
+                <input type="submit">
+            </form>
+
+
+
+
+
+
+
+
+        </div>
+    </section>
+</body>
+
+</html>

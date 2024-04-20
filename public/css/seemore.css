@@ -1,45 +1,72 @@
 /* See More */
-body{
+body {
     font-family: sans-serif;
     background-color: aliceblue
 }
-.sec1{
+
+.sec1 {
     height: 100%;
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
     padding: 40px 0px;
-    
+
 }
-.er{
+
+.er {
+    width: 432px;
     height: 623px;
     background-color: gray;
+    color: white;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     padding: 10px 10px;
 }
 
-.sec1-div1{
-    /* width: 288px; */
+.sec1-div1 {
+    width: 100%;
 }
-.img{
+
+.head1 {
+    width: 212px;
+    height: 50px;
+    /* display: -webkit-box; */
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.img {
     width: 435px;
     height: auto;
     border-radius: 10px;
 }
-.sec1-div2{
-    width: 435px;
+
+.sec1-div2 {
+    width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: baseline;
+    justify-content: space-between;
 }
-.securityStar{}
-.Space{}
-.Type{}
+
+.inner-head-div2 {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.sec1-div1-p {
+    font-size: 20px;
+}
+
+.securityStar {}
+
+.Space {}
+
+.Type {}
 
 .button {
     width: 100%;
@@ -60,7 +87,8 @@ body{
     transition: all 0.375s;
     cursor: pointer;
 }
-.btn:hover{
+
+.btn:hover {
     color: crimson;
     background-color: cornsilk;
 }
@@ -87,12 +115,14 @@ Enrty ====> screen
         height: 545px;
         padding: 23px 0px;
     }
+
     .img {
         width: 279px;
         height: auto;
         /* padding: 1674px 1139px; */
         border-radius: 10px;
     }
+
     .sec1-div2 {
         width: 279px;
         display: flex;
