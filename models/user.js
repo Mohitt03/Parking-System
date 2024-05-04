@@ -9,10 +9,6 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    user_ID: {
-      type: String,
-      required: true
-    },
     email: {
       type: String,
       required: true,

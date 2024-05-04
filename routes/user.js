@@ -4,8 +4,11 @@ const Parking = require("../models/Parking");
 const Reservation = require("../models/Active_Reservation");
 axios = require("axios")
 var session = require('express-session');
-
+const pdf = require('html-pdf');
 const router = Router();
+const fs = require('fs');
+const ejs = require('ejs');
+const { createVerify } = require("crypto");
 
 router.use(require("express-session")({
   secret: "Rusty is a dog",
@@ -27,6 +30,17 @@ router.get("/signup", (req, res) => {
   return res.render("signup");
 });
 
+// Middleware to check if the user is authenticated
+function requireLogin(req, res, next) {
+  if (!req.user) {
+    // Save the current URL to redirect after login
+    req.session.returnTo = req.originalUrl;
+    res.render("signin", { message: "Please log in or signup!" });
+  } else {
+    next();
+  }
+}
+
 router.get("/Availibility", async (req, res) => {
 
   try {
@@ -36,10 +50,8 @@ router.get("/Availibility", async (req, res) => {
 
     const park = await Parking.find({ address: { $regex: search, $options: "i" } })
 
-    console.log(park);
     return res.render("Availibility", { parkings: park });
   } catch (err) {
-    console.log(err);
     res.status(500).json({ error: true, message: "Internal Server Error" });
   }
 });
@@ -47,28 +59,32 @@ router.get("/Availibility", async (req, res) => {
 router.get("/seemore/:id", async (req, res) => {
   try {
     const parking = await Parking.findById(req.params.id);
-    console.log(parking);
     return res.render("seemore", { parking });
   } catch (error) {
-    res.status(500).json({ message: error });
+    res.status(500).json({ message: "error" });
   }
 });
 
-router.get("/booking/:id", async (req, res) => {
-
+router.get("/booking/:id", requireLogin, async (req, res) => {
 
   let currentDate = `${day}-${month}-${year}`;
-  console.log(currentDate)
 
   const parking = await Parking.findById(req.params.id);
-  console.log(parking);
   req.session.parking = parking;
+
+
+
+  const userData = req.session.userData;
+  const email = userData.email
   return res.render("booking",
     {
       parking,
       currentDate,
-      email: req.session.email
+      email: email
     });
+
+
+
 
 });
 
@@ -80,12 +96,9 @@ router.post("/Reservation", async (req, res) => {
     const Arriving = req.body.Entry_time;
     const Leaving = req.body.Exit_time;
     // 
-    console.log(Price);
 
     // Arriving and leaving time
-    console.log(Leaving, Arriving);
     var timeNUM = Leaving - Arriving;
-    console.log(timeNUM);
 
     //Total time into 2 string
     const time = timeNUM.toString();
@@ -94,7 +107,6 @@ router.post("/Reservation", async (req, res) => {
     var TotalTime = time1 + " hour";
     var TotalPrice = time1 * Price;
     //
-    console.log(TotalPrice);
 
 
     const Arriving1 = Arriving.slice(0, 2);
@@ -105,12 +117,10 @@ router.post("/Reservation", async (req, res) => {
     const Leaving2 = Leaving.slice(2, 4);
     var MainLeaving = Leaving1 + ":" + Leaving2 + "am";
     // 
-    console.log(TotalTime);
     //  
-    console.log(MainArriving);
     // 
-    console.log(MainLeaving);
-
+    const userData = req.session.userData;
+    const email = userData.email
     res.render("Reservationproc1", {
       TotalTime,
       TotalPrice,
@@ -118,18 +128,30 @@ router.post("/Reservation", async (req, res) => {
       MainLeaving,
       Date: req.body.date,
       Spot: req.body.spot,
-      email: req.session.email,
+      email: email,
       address: req.body.address
     })
 
 
   } catch (error) {
-    console.log(error.message);
   }
 
 });
 
+
 router.post("/Booking", async (req, res) => {
+  const Payment = req.body.Payment_Method
+  if (Payment === "COD") {
+    var status = "pending"
+  } if (Payment === "Card") {
+    var status = "success"
+  } else {
+    var status = "success"
+
+  }
+
+  console.log(Payment);
+
   const reservation = await Reservation.create({
     Price: req.body.Price,
     Time: req.body.Time,
@@ -140,29 +162,80 @@ router.post("/Booking", async (req, res) => {
     address: req.body.address,
     Username: req.body.Username,
     Email: req.body.Email,
-    user_ID: req.session.userID
+    user_ID: req.session.userID,
+    Payment: {
+      status: status,
+      Payment_Method: req.body.Payment_Method,
+
+      Card: {
+        card_number: req.body.card_number,
+        card_expiry: req.body.card_expiry,
+        cvc: req.body.cvc,
+        card_name: req.body.card_name
+      }
+      ,
+      upi_payment: {
+        upi_id: req.body.upi_id
+      }
+    }
   });
-  // res.render("ReservationComplete.ejs")
+  res.render("ReservationComplete.ejs", { reservation })
+
 })
+
+router.get("/invoice/:id", async (req, res) => {
+
+  const template = fs.readFileSync('./views/Invoice.ejs', 'utf-8');
+
+  // Compile the template
+  const compiledTemplate = ejs.compile(template);
+
+  // Example data (replace with your actual data)
+  const reservation = await Reservation.findById(req.params.id)
+  // Generate the HTML string
+  const invoiceHtml = compiledTemplate(reservation);
+
+  // Generate PDF from HTML
+  pdf.create(invoiceHtml).toStream((err, stream) => {
+    if (err) {
+      res.status(500).send('Error generating PDF');
+    } else {
+      res.setHeader('Content-Type', 'application/pdf');
+      res.setHeader('Content-Disposition', 'attachment; filename="invoice.pdf"');
+      stream.pipe(res);
+    }
+  });
+});
 
 router.post("/signin", async (req, res) => {
   const { email, password } = req.body;
   const email2 = req.body.email; // Assuming you retrieve the username from the login form
   const response = await User.findOne({ email: email2 });
-  console.log(response._id);
-  req.session.userID = response._id;
-  req.session.email = email2;
+  const userData = { username: response.fullName, email: response.email };
+  // Store user data in the session
+  req.session.userData = userData;
 
   try {
     const token = await User.matchPasswordAndGenerateToken(email, password);
 
-    return res.cookie("token", token).redirect("/");
+    const returnTo = req.session.returnTo || '/';
+    delete req.session.returnTo; // Clear the saved URL
+    return res.cookie("token", token).redirect(returnTo);
   } catch (error) {
     return res.render("signin", {
       error: "Incorrect Email or Password",
     });
   }
 });
+
+
+// History of reservations
+router.get("/reservations", async (req, res) => {
+  const userData = req.session.userData;
+  const history = await Reservation.find({ Email: userData.email })
+  return res.render("history", { datas: history });
+
+})
 
 router.get("/logout", (req, res) => {
   res.clearCookie("token").redirect("/");

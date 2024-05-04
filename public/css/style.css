@@ -367,19 +367,19 @@ form button:hover {
 
 /* Section 1 */
 
+.sec1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 120px 110px;
+}
 
 .sec1-div1 {
     display: flex;
     flex-direction: row;
 }
 
-.sec1-div2 {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 50%;
-}
 
 .sec1-h1 {
     margin-bottom: 3%;
@@ -412,6 +412,38 @@ form button:hover {
 
 .sec1-div3 {
     width: 50%;
+}
+
+/* Reservation Page payment method */
+/* Add your custom CSS styling here */
+.form-container {
+    display: none;
+}
+
+.form-container.active {
+    display: block;
+}
+
+/* Card */
+.padding {
+
+    padding: 5rem !important;
+}
+
+
+
+.form-control:focus {
+    box-shadow: 10px 0px 0px 0px #ffffff !important;
+    border-color: #4ca746;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+/* container-fluid */
+.container-fluid {
+    width: 65%;
 }
 
 @media (max-width: 950px) {
@@ -714,7 +746,8 @@ header .navbar {
 }
 
 .nav-btn2 {
-    border: 0px;
+    height: 40px;
+    color: #6f9730;
     background-color: white;
 }
 

@@ -24,11 +24,11 @@ mongoose
 
 app.set("view engine", "ejs");
 app.set("views", path.resolve("./views"));
-
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookiePaser());
 app.use(checkForAuthenticationCookie("token"));
-app.use(express.static(path.resolve("./public")));
+// app.use(express.static(path.resolve("./public")));
 
 app.get("/", async (req, res) => {
   res.render("home", {

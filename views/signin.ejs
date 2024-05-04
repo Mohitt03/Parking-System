@@ -7,33 +7,130 @@
 </head>
 
 <body>
-  <%- include('./partials/nav') %>
+  <style>
+    body {
+      height: 100vh;
+      width: 100%;
+      /* background: url(pxfuel.jpg) center / cover no-repeat; */
+      background-color: aliceblue;
+    }
 
-    <div class="form-popup">
-      <div class="form-box login">
-        <div class="form-content">
-          <h2>LOGIN</h2>
-          <form action="/user/signin" method="POST">
-            <div class="input-field">
-              <input type="email" name="email" placeholder="email" required>
-              <label></label>
-            </div>
-            <div class="input-field">
-              <input type="password" name="password" placeholder="password" required>
-              <label></label>
-            </div>
-            <button>login</button>
-          </form>
-          <div class="bottom-link">
-            Don't have an account?
-            <a href="/register" id="signup-link">Signup</a>
+    .form-popup {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    form-popup .form-box {
+      display: flex;
+    }
+
+    .form-box .form-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 400px;
+      padding: 35px;
+      margin-top: 125px;
+      background-color: white;
+    }
+
+    .form-box h2 {
+      text-align: center;
+      margin-bottom: 29px;
+    }
+
+    .h2,
+    h2 {
+      font-size: calc(1.325rem + .9vw);
+    }
+
+    form .input-field {
+      position: relative;
+      height: 50px;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .input-field input {
+      height: 100%;
+      width: 100%;
+      background: none;
+      outline: none;
+      font-size: 0.95rem;
+      padding: 0 15px;
+      border: 1px solid #ed540d;
+      border-radius: 3px;
+    }
+
+    button,
+    input,
+    optgroup,
+    select,
+    textarea {
+      margin: 0;
+      font-family: inherit;
+      font-size: inherit;
+      line-height: inherit;
+    }
+
+    form button {
+      width: 100%;
+      color: #fff;
+      border: none;
+      outline: none;
+      padding: 14px 0;
+      font-size: 1rem;
+      font-weight: 500;
+      border-radius: 3px;
+      cursor: pointer;
+      margin: 25px 0;
+      background: #060e10;
+      transition: 0.2s ease;
+    }
+
+    button,
+    select {
+      text-transform: none;
+    }
+
+    .form-content .bottom-link {
+      text-align: center;
+    }
+
+    .form-box a {
+      color: #00bcd4;
+      text-decoration: none;
+    }
+  </style>
+  <div class="form-popup">
+    <div class="form-box login">
+      <div class="form-content">
+        <h2>LOGIN</h2>
+        <h2><%= locals.message %></h2>
+        <form action="/user/signin" method="POST">
+          <div class="input-field">
+            <input type="email" name="email" value="mohitnapure123@gmail.com" placeholder="email" required autocomplete="email">
+            <label></label>
           </div>
+          <div class="input-field">
+            <input type="password" name="password" value="1212" placeholder="password" required>
+            <label></label>
+          </div>
+          <button>login</button>
+        </form>
+        <div class="bottom-link">
+          Don't have an account?
+          <a href="/register" id="signup-link">Signup</a>
         </div>
       </div>
-
     </div>
 
-    <%- include('./partials/scripts') %>
+  </div>
+
+  <%- include('./partials/scripts') %>
 </body>
 
 </html>

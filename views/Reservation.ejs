@@ -22,6 +22,7 @@
             <th>Leaving</th>
             <th>Price</th>
             <th>Time</th>
+            <th>Payment</th>
         </tr>
         <% datas.forEach(data=> { %>
             <tr>
@@ -58,12 +59,20 @@
                 <td>
                     <%= data.Time %>
                 </td>
+                <td>
+                    <%= data.Payment.Payment_Method %>
+                </td>
                 <td><a class="delete" href="/admin/reservation/<%= data._id %>">Delete</a></td>
             </tr>
 
             <% }); %>
 
     </table>
+    <script>
+        setTimeout(function () {
+            location.reload();
+        }, 3000);
+    </script>
 </body>
 
 </html>

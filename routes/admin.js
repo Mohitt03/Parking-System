@@ -39,8 +39,35 @@ router.get("/pages-blank", (req, res) => {
 
 // Reservations
 
+
+// const reservationsCollection = db.collection('reservations')
+
+// Find all reservations that have expired
+// const expiredReservations = Reservation.find({
+//     Leaving: { $lt: new Date() }
+// });
+
+// // Delete all expired reservations
+// expiredReservations.deleteMany(err => {
+//     if (err) throw err;
+// })
+
+
 router.get("/reservation", async (req, res) => {
-    const reservation = await Reservation.find()
+
+    const reservation = await Reservation.find();
+    const d = new Date();
+    const hour = d.getHours();
+
+
+
+    const reservation1 = await Reservation.find({ Leaving: hour + ":00am" });
+    const datas = reservation1;
+    datas.forEach(async data => {
+        const reservation = await Reservation.findByIdAndRemove(data._id);
+
+    });
+
     return res.render("Reservation", { datas: reservation });
 });
 
@@ -54,7 +81,7 @@ router.get('/reservation/:id', async (req, res) => {
         if (!reservation) {
             return res.status(404).json({ message: 'Not found' });
         }
-        return res.redirect("/admin/admin")
+        return res.redirect('back');
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -80,7 +107,7 @@ router.get('/users/:id', async (req, res) => {
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
-        return res.redirect("/admin/admin")
+        return res.redirect('back');
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -156,7 +183,7 @@ router.get('/parking/:id', async (req, res) => {
         if (!parking) {
             return res.status(404).json({ message: 'User not found' });
         }
-        return res.redirect("/admin/admin")
+        return res.redirect('back');
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -173,7 +200,6 @@ let month = date.getMonth() + 1;
 let year = date.getFullYear();
 
 let currentDate = `${day}-${month}-${year}`;
-console.log(currentDate);
 
 router.get("/admin2", async (req, res) => {
 
@@ -184,7 +210,6 @@ router.get("/admin2", async (req, res) => {
 
     // const search = req.query.search || "";
     const booking = await Reservation.findOne({ date: currentDate })
-    console.log(booking);
 
     return res.render("Admin2", {
         users: user,

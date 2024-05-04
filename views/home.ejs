@@ -1,38 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <%- include('./partials/head') %>
+
+<head>
+  <%- include('./partials/head') %>
     <title>Park My Spot</title>
 
-  </head>
-  <body>
-    <%- include('./partials/nav') %>
+</head>
+
+<body>
+  <%- include('./partials/nav') %>
 
 
 
 
 
-    <section>
-        <div class="sec1-div1">
-            <div class="sec1-div2">
-                <form action="/user/Availibility">
-                    <h1 class="sec1-h1">Where You Want To Go ?</h1>
-                    <input class="sec1-inp1" id="searchBar" name="search" type="text" placeholder="Search...">
-                    <br>
-                    <div class="inp-class">
-                        <input class="home-inp" type="submit" value="Search">
-                    </div>
-                </form>
+    <section class="sec1">
+      <div class="sec1-div1">
+        <div class="sec1-div2">
+          <form action="/user/Availibility">
+            <h1 class="sec1-h1">Where You Want To Go ?</h1>
+            <input class="sec1-inp1" id="searchBar" name="search" type="text" placeholder="Search...">
+            <br>
+            <div class="inp-class">
+              <input class="home-inp" type="submit" value="Search">
             </div>
-          <div>
-              <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d55077.69763873482!2d72.8070820610023!3d21.19078653906909!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sParking%20in%20surat!5e0!3m2!1sen!2sin!4v1703056664364!5m2!1sen!2sin"
-                  width="500" height="490" style="border:0;" allowfullscreen="" loading="lazy"
-                  referrerpolicy="no-referrer-when-downgrade"></iframe>
-          </div>
+          </form>
+        </div>
+        <div>
+        </div>
       </div>
-  </section>
+    </section>
 
-    <%- include('./partials/scripts') %>
-  </body>
+
+</body>
+
 </html>

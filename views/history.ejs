@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Park My Spot</title>
+    <link rel="stylesheet" href="/css/Admin.css">
+</head>
+
+<body>
+    <% if (datas.length===0) { %>
+        <h1>You have no past reservation</h1>
+        <% } else { %>
+            <table>
+                <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>User Id</th>
+                    <th>Reservstion ID</th>
+                    <th>Spot</th>
+                    <th>Date</th>
+                    <th>Address</th>
+                    <th>Arriving</th>
+                    <th>Leaving</th>
+                    <th>Price</th>
+                    <th>Time</th>
+                    <th>Payment</th>
+                </tr>
+                <% datas.forEach(data=> { %>
+                    <tr>
+                        <td>
+                            <%= data.Username %>
+                        </td>
+                        <td>
+                            <%= data.Email %>
+                        </td>
+                        <td>
+                            <%= data.user_ID %>
+                        </td>
+                        <td>
+                            <%= data._id %>
+                        </td>
+                        <td>
+                            <%= data.spot %>
+                        </td>
+                        <td>
+                            <%= data.date %>
+                        </td>
+                        <td>
+                            <%= data.address %>
+                        </td>
+                        <td>
+                            <%= data.Arriving %>
+                        </td>
+                        <td>
+                            <%= data.Leaving %>
+                        </td>
+                        <td>
+                            <%= data.Price %>
+                        </td>
+                        <td>
+                            <%= data.Time %>
+                        </td>
+                        <td>
+                            <%= data.Payment.Payment_Method %>
+                        </td>
+                    </tr>
+
+                    <% }); %>
+
+            </table>
+            <% } %>
+</body>
+
+</html>
