@@ -93,39 +93,67 @@ router.post("/Reservation", async (req, res) => {
     const Price = req.session.parking.Reservation_Price;
     const Restaurant = await Reservation.findOne({ restaurant: req.body.restaurant });
     // const parking = await Parking.findById();
-    const Arriving = req.body.Entry_time;
-    const Leaving = req.body.Exit_time;
-    // 
+    const startTime = req.body.Entry_time + ":00";
+    const endTime = req.body.Exit_time + ":00";
+    const startDate = req.body.date + "T";
 
-    // Arriving and leaving time
-    var timeNUM = Leaving - Arriving;
+    const STT = startDate+startTime;
+    const ETT = startDate+endTime;
 
-    //Total time into 2 string
-    const time = timeNUM.toString();
-    var time1 = Number(time.slice(0, 1));
-    var time2 = Number(time.slice(1, 3));
-    var TotalTime = time1 + " hour";
-    var TotalPrice = time1 * Price;
-    //
+    // Time, Price, Discount Calculator
+    function getTimeDifference(STT,ETT,Price) {
+      // Convert dates to milliseconds since epoch
+      const startMillis = new Date(STT).getTime();
+      const endMillis = new Date(ETT).getTime();
+  
+      // Calculate the difference in milliseconds
+      const diffInMilliseconds = Math.abs(endMillis - startMillis);
+  
+  
+      // Convert milliseconds to days, hours, minutes, and seconds
+      const days = Math.floor(diffInMilliseconds / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diffInMilliseconds % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diffInMilliseconds % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diffInMilliseconds % (1000 * 60)) / 1000);
+      // Format the output string
+      TT = "";
+      if (days > 0) {
+          TT += `${days} day${days > 1 ? "s" : ""}, `;
+      }
+      if (hours > 0) {
+          TT += `${hours} hour${hours > 1 ? "s" : ""}, `;
+      }
+      if (minutes > 0) {
+          TT += `${minutes} minute${minutes > 1 ? "s" : ""} `;
+      }
+      if (minutes) {
+          console.log("Discount");
+  
+      }
+      TP = Price * hours;
+  }
+  // END
+  getTimeDifference(STT,ETT,Price)
+    console.log(
+      TT,
+      TP,
+      "Arriving =" + startTime,
+      "Leaving =" + endTime,
+      startDate
+    );
 
+    console.log(STT, ETT);
 
-    const Arriving1 = Arriving.slice(0, 2);
-    const Arriving2 = Arriving.slice(2, 4);
-    var MainArriving = Arriving1 + ":" + Arriving2 + "am";
-
-    const Leaving1 = Leaving.slice(0, 2);
-    const Leaving2 = Leaving.slice(2, 4);
-    var MainLeaving = Leaving1 + ":" + Leaving2 + "am";
-    // 
-    //  
-    // 
+    
+     
+    
     const userData = req.session.userData;
     const email = userData.email
     res.render("Reservationproc1", {
-      TotalTime,
-      TotalPrice,
-      MainArriving,
-      MainLeaving,
+      TotalTime: TT,
+      TotalPrice: TP,
+      MainArriving: req.body.Entry_time,
+      MainLeaving: req.body.Exit_time,
       Date: req.body.date,
       Spot: req.body.spot,
       email: email,
