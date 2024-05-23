@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Park My Spot</title>
     <link rel="stylesheet" href="/css/Admin.css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
@@ -25,7 +26,9 @@
                     <th>Leaving</th>
                     <th>Price</th>
                     <th>Time</th>
-                    <th>Payment</th>
+                    <th>Payment Method</th>
+                    <th>Payment Status</th>
+
                 </tr>
                 <% datas.forEach(data=> { %>
                     <tr>
@@ -66,7 +69,12 @@
                             <%= data.Payment.Payment_Method %>
                         </td>
                         <td>
-                            <a href="/user/invoice/<%= data._id %>">Invoice</a>
+                            <%= data.Payment.status %>
+                        </td>
+                        <td>
+                            <!-- <a href=""></a> -->
+                            <button class="book nav-btn1 b "><a class="logout login-btn" href="/user/invoice/<%= data._id %>">Download Bill</a></button>
+
                         </td>
                     </tr>
 

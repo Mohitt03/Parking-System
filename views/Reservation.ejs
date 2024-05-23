@@ -12,7 +12,7 @@
     <table>
         <tr>
             <th>Username</th>
-            <th>Email</th>
+            <th>Email</th>n
             <th>User Id</th>
             <th>Reservstion ID</th>
             <th>Spot</th>
@@ -22,7 +22,8 @@
             <th>Leaving</th>
             <th>Price</th>
             <th>Time</th>
-            <th>Payment</th>
+            <th>Payment Method</th>
+            <th>Payment Status</th>
         </tr>
         <% datas.forEach(data=> { %>
             <tr>
@@ -62,17 +63,15 @@
                 <td>
                     <%= data.Payment.Payment_Method %>
                 </td>
+                <td>
+                    <%= data.Payment.status %>
+                </td>
                 <td><a class="delete" href="/admin/reservation/<%= data._id %>">Delete</a></td>
             </tr>
 
             <% }); %>
 
     </table>
-    <script>
-        setTimeout(function () {
-            location.reload();
-        }, 3000);
-    </script>
 </body>
 
 </html>

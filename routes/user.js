@@ -93,23 +93,25 @@ router.post("/Reservation", async (req, res) => {
     const Price = req.session.parking.Reservation_Price;
     const Restaurant = await Reservation.findOne({ restaurant: req.body.restaurant });
     // const parking = await Parking.findById();
+    req.session.mapLink = req.body.link;
+
     const startTime = req.body.Entry_time + ":00";
     const endTime = req.body.Exit_time + ":00";
     const startDate = req.body.date + "T";
 
-    const STT = startDate+startTime;
-    const ETT = startDate+endTime;
+    const STT = startDate + startTime;
+    const ETT = startDate + endTime;
 
     // Time, Price, Discount Calculator
-    function getTimeDifference(STT,ETT,Price) {
+    function getTimeDifference(STT, ETT, Price) {
       // Convert dates to milliseconds since epoch
       const startMillis = new Date(STT).getTime();
       const endMillis = new Date(ETT).getTime();
-  
+
       // Calculate the difference in milliseconds
       const diffInMilliseconds = Math.abs(endMillis - startMillis);
-  
-  
+
+
       // Convert milliseconds to days, hours, minutes, and seconds
       const days = Math.floor(diffInMilliseconds / (1000 * 60 * 60 * 24));
       const hours = Math.floor((diffInMilliseconds % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -118,22 +120,22 @@ router.post("/Reservation", async (req, res) => {
       // Format the output string
       TT = "";
       if (days > 0) {
-          TT += `${days} day${days > 1 ? "s" : ""}, `;
+        TT += `${days} day${days > 1 ? "s" : ""} `;
       }
       if (hours > 0) {
-          TT += `${hours} hour${hours > 1 ? "s" : ""}, `;
+        TT += `${hours} hour${hours > 1 ? "s" : ""} `;
       }
       if (minutes > 0) {
-          TT += `${minutes} minute${minutes > 1 ? "s" : ""} `;
+        TT += `${minutes} minute${minutes > 1 ? "s" : ""} `;
       }
       if (minutes) {
-          console.log("Discount");
-  
+        console.log("Discount");
+
       }
       TP = Price * hours;
-  }
-  // END
-  getTimeDifference(STT,ETT,Price)
+    }
+    // END
+    getTimeDifference(STT, ETT, Price)
     console.log(
       TT,
       TP,
@@ -142,11 +144,8 @@ router.post("/Reservation", async (req, res) => {
       startDate
     );
 
-    console.log(STT, ETT);
+    // console.log(STT, ETT);
 
-    
-     
-    
     const userData = req.session.userData;
     const email = userData.email
     res.render("Reservationproc1", {
@@ -207,9 +206,14 @@ router.post("/Booking", async (req, res) => {
       }
     }
   });
-  res.render("ReservationComplete.ejs", { reservation })
+  const mapLink = req.session.mapLink;
+  res.render("ReservationComplete.ejs", {
+    reservation, mapLink
+
+  })
 
 })
+
 
 router.get("/invoice/:id", async (req, res) => {
 

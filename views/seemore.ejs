@@ -15,14 +15,14 @@
 
             <!-- Head Section -->
 
-            <div class="sec1-div1">
+            <!-- <div class="sec1-div1">
                 <div class="head1">
                     <h2 class="">
                         <%=parking.address%>
                     </h2>
                 </div>
 
-            </div>
+            </div> -->
 
 
             <!-- Middle  Section -->
@@ -51,26 +51,24 @@
                 </div>
 
                 <div>
-                    <div>
-                        <h2>Features</h2>
-                    </div>
-                    <div>
-                        <%=parking.Features%>
-                    </div>
+                    <h2>Features :- <p>
+                            <%=parking.Features%>
+                        </p>
+                    </h2>
                 </div>
 
                 <div>
-                    <div>
-                        <h3>Opening Times</h3>
-                    </div>
-                    <div>
-                        <h4>
-                            Mon-Sun__________________<p><%=parking.Opening_Times%>-<%=parking.Closing_Times%></p>
-
-                        </h4>
-                    </div>
+                    <h3>Opening Time :- <p>
+                            <%=parking.Opening_Times%>-<%=parking.Closing_Times%>
+                        </p>
+                    </h3>
                 </div>
-
+                <div>
+                    <h3>Opening Time :- <p>
+                        <a href="<%=parking.link%>"><button class="btn btn2">Go to map</button></a>
+                        </p>
+                    </h3>
+                </div>
             </div>
 
 

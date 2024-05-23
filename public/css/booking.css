@@ -1,20 +1,19 @@
-
-
 .formdiv {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 129px 0px;
+    padding: 20px 0px;
 }
 
-.h1{
+.h1 {
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 .form {
     text-align: center;
-    padding: 30px 40px;
+    padding: 90px 40px;
     background-color: #e4e4e4;
 }
 
@@ -27,12 +26,13 @@
 .flabel {
     font-weight: 600;
     font-family: system-ui;
+    
 
 }
 
 .finput1 {
     padding: 10px;
-}
+    width: 440px;}
 
 .finput2 {
     padding: 10px 22px;
@@ -40,6 +40,7 @@
 
 .finput3 {
     padding: 10px 40px;
+    margin-top: 10px;
 }
 
 .finput4 {
@@ -67,6 +68,7 @@
     background-color: #101010c2;
     color: white;
     border: none;
+    width: 190px;
 }
 
 .part1 {
@@ -88,4 +90,25 @@
     justify-content: center;
     align-items: center;
     margin: 10px;
+}
+
+@media (max-width:767px) {
+    .finput {
+        width: 200px;
+    }
+}
+
+
+@media (max-width:767px) {
+    .form {
+        width: 100%;
+        text-align: center;
+        padding: 30px 40px;
+        background-color: #e4e4e4;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
 }

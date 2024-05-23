@@ -56,18 +56,7 @@ router.get("/pages-blank", (req, res) => {
 router.get("/reservation", async (req, res) => {
 
     const reservation = await Reservation.find();
-    const d = new Date();
-    const hour = d.getHours();
-
-
-
-    const reservation1 = await Reservation.find({ Leaving: hour + ":00am" });
-    const datas = reservation1;
-    datas.forEach(async data => {
-        const reservation = await Reservation.findByIdAndRemove(data._id);
-
-    });
-
+    console.log(new Date(Date.now()));
     return res.render("Reservation", { datas: reservation });
 });
 

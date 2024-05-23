@@ -21,217 +21,343 @@
         .form-container.active {
             display: block;
         }
+
+
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* .padding{
+            bottom: 500px;
+        } */
+
+        .container-main {
+            width: 331px;
+            margin: 10px auto;
+            border: 2px solid black;
+            padding: 5px;
+            text-align: center;
+
+        }
+
+        .container1 {
+            width: 304px;
+            height: 100px;
+            margin: 10px auto;
+            border: 2px solid black;
+            /* padding: 20px; */
+            text-align: center;
+        }
+
+        .w {
+            margin-left: 140px;
+        }
+
+        .container2 {
+            height: 102px;
+            width: 304px;
+            margin: 14px auto;
+            border: 2px solid black;
+            padding: 20px 0px;
+            text-align: center;
+        }
+
+        .k {
+            margin: 0px;
+        }
+
+        .k2 {
+            margin-top: 12px;
+            margin-bottom: 0px;
+        }
+
+        .h3,
+        h3 {
+            font-size: 1.25rem;
+        }
+
+        .container3 {
+            height: 27px;
+            width: 290px;
+            margin: 10px auto;
+            text-align: center;
+        }
+
+        .container4 {
+            width: 304px;
+            margin: 18px auto;
+            border: 2px solid black;
+            padding: 5px 0px;
+            text-align: center;
+        }
+
+        .container5 {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 90px;
+            width: 304px;
+            margin: 10px auto;
+            text-align: center;
+        }
+
+        .container6 {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 304px;
+            margin: 10px auto;
+            border: 2px solid black;
+            text-align: center;
+            padding: 5px 0px;
+        }
+
+        .receipt-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .receipt-table th,
+        .receipt-table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
     </style>
     <section>
-        <div>
-            <h1>
-                ₹<%= TotalPrice %>
-            </h1>
-            <h1>
-                <%= TotalTime %>
-            </h1>
-            <h1>
-                <%= MainArriving %>
-            </h1>
-            <h1>
-                <%= MainLeaving %>
-            </h1>
-            <h1>
-                <%= Date %>
-            </h1>
-            <h1>
-                <%= Spot %>
-            </h1>
-            <h1>
-                <%= address %>
-            </h1>
-            <h1>
-                <%= email %>
-            </h1>
+        <div class="container-main">
+            <div class="container1">
+                <h2>Price <span class="w">₹<%= TotalPrice %></span></h2>
+                <h3>Time <span class="w">
+                        <%= TotalTime %>
+                    </span></h3>
+            </div>
+            <div class="container2">
+                <h3 class="k">
+                    <%= Date %>
+                </h3>
+                <h4 class="k2">
+                    <%= MainArriving %> - <%= MainLeaving %>
+                </h4>
+            </div>
 
-            <form class="form" action="/user/Booking" method="post">
-                <input name="Price" value="<%= TotalPrice %>" type="text">
-                <input name="Time" value="<%= TotalTime %>" type="text">
-                <input name="Arriving" value="<%= MainArriving %>" type="text">
-                <input name="Leaving" value="<%= MainLeaving %>" type="text">
-                <input name="date" value="<%= Date %>" type="text">
-                <input name="spot" value="<%= Spot %>" type="text">
-                <input name="address" value="<%= address %>" type="text">
-                <input name="Username" type="text">
-                <input name="Email" value="<%= email %>" type="email">
+            <div class="container3">
+                <p>Parking Spot <span>
+                        <%= Spot %>
+                    </span></p>
+            </div>
+
+            <div class="container4">
+                <h3>Parking Address</h3>
+                <p>
+                    <%= address %>
+                </p>
+            </div>
+            <div class="container5">
+                <form class="form" action="/user/Booking" method="post">
+                    <div style="display: none;">
+
+                        <input name="Price" value="<%= TotalPrice %>" type="text">
+                        <input name="Time" value="<%= TotalTime %>" type="text">
+                        <input name="Arriving" value="<%= MainArriving %>" type="text">
+                        <input name="Leaving" value="<%= MainLeaving %>" type="text">
+                        <input name="date" value="<%= Date %>" type="text">
+                        <input name="spot" value="<%= Spot %>" type="text">
+                        <input name="address" value="<%= address %>" type="text">
+                    </div>
+                    <input name="Username" type="text" placeholder="Username">
+                    <input name="Email" value="<%= email %>" type="email" placeholder="Email">
+            </div>
+            <div class="container6">
+                <h3>Payment Method</h3>
                 <div>
-                    <input type="radio" class="btn-check" name="Payment_Method" id="option1" value="COD" autocomplete="off">
-                    <label class="btn btn-outline-secondary" for="option1">Cash on Delivery</label>
+                    <input type="radio" class="btn-check" name="Payment_Method" id="option1" value="COD"
+                        autocomplete="off">
+                    <label class="btn btn-outline-secondary" for="option1">Cash</label>
 
 
-                    <input type="radio" class="btn-check" name="Payment_Method" id="option3" value="Card" autocomplete="off">
+                    <input type="radio" class="btn-check" name="Payment_Method" id="option3" value="Card"
+                        autocomplete="off">
                     <label class="btn btn-outline-secondary" for="option3">Credit/Debit card</label>
 
-                    <input type="radio" class="btn-check" name="Payment_Method" id="option4" value="Number" autocomplete="off">
-                    <label class="btn btn-outline-secondary" for="option4">Number</label>
-                    <div>
-                        <div class="form-container" id="COD">
+                    <input type="radio" class="btn-check" name="Payment_Method" id="option4" value="UPI"
+                        autocomplete="off">
+                    <label class="btn btn-outline-secondary" for="option4">UPI</label>
+                    <div class="form-container" id="COD">
 
-                            <h2>COD</h2>
-                            <input type="submit" value="Conform">
-                        </div>
-
-                        <div class="form-container" id="Card">
-                            <!-- Form 2 content -->
-                            <h2>Card</h2>
-                            <!-- Add your form fields here -->
-
-                            <div class="padding">
-                                <div class="row">
-                                    <div class="container-fluid d-flex justify-content-center">
-                                        <div class="col-sm-8 col-md-6">
-                                            <div class="card">
-                                                <div class="card-header">
-
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <span>CREDIT/DEBIT CARD PAYMENT</span>
-
-                                                        </div>
-
-                                                        <div class="col-md-6 text-right" style="margin-top: -5px;">
-
-                                                            <img src="https://img.icons8.com/color/36/000000/visa.png">
-                                                            <img
-                                                                src="https://img.icons8.com/color/36/000000/mastercard.png">
-                                                            <img src="https://img.icons8.com/color/36/000000/amex.png">
-
-                                                        </div>
-
-                                                    </div>
-
-                                                </div>
-                                                <div class="card-body" style="height: 350px">
-                                                    <div class="form-group">
-                                                        <label for="cc-number" class="control-label">CARD NUMBER</label>
-                                                        <input id="cc-number" name="card_number"
-                                                             type="tel"
-                                                            class="input-lg form-control cc-number"
-                                                            autocomplete="cc-number"
-                                                            placeholder="&bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull;">
-                                                    </div>
-
-                                                    <div class="row">
-
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label for="cc-exp" class="control-label">CARD
-                                                                    EXPIRY</label>
-                                                                <input id="cc-exp" name="card_expiry" 
-                                                                    type="tel" class="input-lg form-control cc-exp"
-                                                                    autocomplete="cc-exp"
-                                                                    placeholder="&bull;&bull; / &bull;&bull;" >
-                                                            </div>
-
-
-                                                        </div>
-
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label for="cc-cvc" class="control-label">CARD
-                                                                    CVC</label>
-                                                                <input id="cc-cvc" name="cvc"  type="tel"
-                                                                    class="input-lg form-control cc-cvc"
-                                                                    autocomplete="off"
-                                                                    placeholder="&bull;&bull;&bull;&bull;" >
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-
-
-                                                    <div class="form-group">
-                                                        <label for="numeric" class="control-label">CARD HOLDER
-                                                            NAME</label>
-                                                        <input type="text" name="card_name" 
-                                                            class="input-lg form-control">
-                                                    </div>
-
-                                                    <div class="form-group">
-
-                                                        <input value="MAKE PAYMENT" type="submit"
-                                                            class="btn btn-success btn-lg form-control"
-                                                            style="font-size: .8rem;">
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-container" id="Number">
-                            <!-- Form 2 content -->
-                            <h2>Number</h2>
-                            <div class="padding">
-                                <div class="row">
-                                    <div class="container-fluid d-flex justify-content-center">
-                                        <div class="col-sm-8 col-md-6">
-                                            <div class="card">
-                                                <div class="card-header">
-
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <span>NUMBER</span>
-
-                                                        </div>
-
-                                                        <div class="col-md-6 text-right" style="margin-top: -5px;">
-
-                                                            <img src="https://img.icons8.com/color/36/000000/visa.png">
-                                                            <img
-                                                                src="https://img.icons8.com/color/36/000000/mastercard.png">
-                                                            <img src="https://img.icons8.com/color/36/000000/amex.png">
-
-                                                        </div>
-
-                                                    </div>
-
-                                                </div>
-                                                <div class="card-body" style="height: 350px">
-                                                    <div class="form-group">
-                                                        <label for="cc-number" class="control-label">PHONE
-                                                            NUMBER</label>
-                                                        <input id="cc-number" name="upi_id" type="text"
-                                                            class="input-lg form-control cc-number"
-                                                            autocomplete="cc-number"
-                                                            placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;">
-                                                    </div>
-
-
-                                                    <!-- <div class="form-group">
-                                                        <label for="numeric" class="control-label">PHONE HOLDER
-                                                            NAME</label>
-                                                        <input type="text" name="phone_name"
-                                                            class="input-lg form-control">
-                                                    </div> -->
-
-                                                    <div class="form-group">
-
-                                                        <input value="MAKE PAYMENT" type="button"
-                                                            class="btn btn-success btn-lg form-control"
-                                                            style="font-size: .8rem;">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-
+                        <input type="submit" value="Conform">
                     </div>
-                </div>
 
-            </form>
+                    <div class="form-container" id="Card">
+                        <!-- Form 2 content -->
+                        <h2>Card</h2>
+                        <!-- Add your form fields here -->
+
+                        <div class="padding">
+                            <div class="row">
+                                <div class="container-fluid d-flex justify-content-center">
+                                    <div class="col-sm-8 col-md-6" style="width: 600px;">
+                                        <div class="card">
+                                            <div class="card-header">
+
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <span>CREDIT/DEBIT CARD PAYMENT</span>
+
+                                                    </div>
+
+                                                    <div class="col-md-6 text-right" style="margin-top: -5px;">
+
+                                                        <img src="https://img.icons8.com/color/36/000000/visa.png">
+                                                        <img
+                                                            src="https://img.icons8.com/color/36/000000/mastercard.png">
+                                                        <img src="https://img.icons8.com/color/36/000000/amex.png">
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                            <div class="card-body" style="height: 250px">
+                                                <div class="form-group">
+                                                    <label for="cc-number" class="control-label">CARD NUMBER</label>
+                                                    <input id="cc-number" name="card_number" type="tel"
+                                                        class="input-lg form-control cc-number" autocomplete="cc-number"
+                                                        placeholder="&bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull;">
+                                                </div>
+
+                                                <div class="row">
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="cc-exp" class="control-label">CARD
+                                                                EXPIRY</label>
+                                                            <input id="cc-exp" name="card_expiry" type="tel"
+                                                                class="input-lg form-control cc-exp"
+                                                                autocomplete="cc-exp"
+                                                                placeholder="&bull;&bull; / &bull;&bull;">
+                                                        </div>
+
+
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="cc-cvc" class="control-label">CARD
+                                                                CVC</label>
+                                                            <input id="cc-cvc" name="cvc" type="tel"
+                                                                class="input-lg form-control cc-cvc" autocomplete="off"
+                                                                placeholder="&bull;&bull;&bull;&bull;">
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+
+                                                <div class="form-group">
+                                                    <label for="numeric" class="control-label">CARD HOLDER
+                                                        NAME</label>
+                                                    <input type="text" name="card_name" class="input-lg form-control" style="margin-bottom: 10px;">
+                                                </div>
+
+                                                <div class="form-group">
+
+                                                    <input value="MAKE PAYMENT" type="submit"
+                                                        class="btn btn-success btn-lg form-control"
+                                                        style="font-size: .8rem;">
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-container" id="UPI">
+                        <!-- Form 2 content -->
+                        <h2>UPI</h2>
+                        <div class="padding">
+                            <div class="row">
+                                <div class="container-fluid d-flex justify-content-center">
+                                    <div class="col-sm-8 col-md-6" style="width: 600px;">
+                                        <div class="card">
+                                            <div class="card-header">
+
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <span>UPI</span>
+
+                                                    </div>
+
+                                                    <div class="col-md-6 text-right" style="margin-top: -5px;">
+
+                                                        <img src="https://img.icons8.com/color/36/000000/visa.png">
+                                                        <img
+                                                            src="https://img.icons8.com/color/36/000000/mastercard.png">
+                                                        <img src="https://img.icons8.com/color/36/000000/amex.png">
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                            <div class="card-body" style="height: 250px">
+                                                <div class="form-group">
+                                                    <label for="cc-number" class="control-label">UPI ID</label>
+                                                    <input id="cc-number" name="upi_id" type="text" style="margin-bottom: 10px;"
+                                                        class="input-lg form-control cc-number" autocomplete="cc-number"
+                                                        placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;">
+                                                </div>
+
+
+                                                <!-- <div class="form-group">
+                                                    <label for="numeric" class="control-label">PHONE HOLDER
+                                                        NAME</label>
+                                                    <input type="text" name="phone_name"
+                                                        class="input-lg form-control">
+                                                </div> -->
+
+                                                <div class="form-group">
+
+                                                    <input value="MAKE PAYMENT" type="submit"
+                                                        class="btn btn-success btn-lg form-control"
+                                                        style="font-size: .8rem;">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+                </form>
+            </div>
+
+
+
+
+
+
+        </div>
+
+
+        <div>
+
+
+
 
 
 

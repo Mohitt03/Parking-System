@@ -16,7 +16,6 @@ body {
 
 .er {
     width: 432px;
-    height: 623px;
     background-color: gray;
     color: white;
     border-radius: 10px;
@@ -88,6 +87,10 @@ body {
     cursor: pointer;
 }
 
+.btn2{
+    width: 130px;
+}
+
 .btn:hover {
     color: crimson;
     background-color: cornsilk;
@@ -116,18 +119,12 @@ Enrty ====> screen
         padding: 23px 0px;
     }
 
-    .img {
-        width: 279px;
-        height: auto;
-        /* padding: 1674px 1139px; */
-        border-radius: 10px;
-    }
+    .sec1-div2 {}
 
-    .sec1-div2 {
-        width: 279px;
-        display: flex;
-        flex-direction: column;
-        align-items: baseline;
-    }
+}
 
+@media (max-width:565px) {
+    .er {
+        width: 246px;
+    }
 }

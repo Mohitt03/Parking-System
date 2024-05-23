@@ -1,44 +1,41 @@
-<nav class="navbar">
-  <div class="div-img ">
-    <img src="\images\image.png" class="head-img">
-    <h3>Park My Spot</h3>
-  </div>
-  <div class="navbar-div1">
-    <ul class="menu-links">
-      <li><a href="#">Home</a></li>
-      <li><a href="/about">About us</a></li>
-      <li><a href="/contact">Contact us</a></li>
-      <span id="close-menu-btn" class="material-symbols-outlined">close</span>
-    </ul>
-    <!-- <video autoplay muted loop id="myVideo">
-              <source src="\images\car.mp4" type="video/mp4">
-          </video> -->
-
-  </div>
-  <div class="navbar-div2">
-
-
-    <% if (locals.user) { %>
-      <div class="div-btn">
-        <button class="book nav-btn1 b "><a href="/user/logout" class="logout login-btn">LOG OUT</a></button>
-        <button class="book nav-btn2 b "><a href="/user/reservations" class="logout login-btn">Reservations</a></button>
-        <span id="hamburger-btn" class="material-symbols-outlined">menu</span>
-
-      </div>
-      <% } else {%>
-        <div class="div-btn">
-          <button class="book nav-btn1 b "><a class="logout login-btn" href="/user/signup">Register</a></button>
-          <button class="book nav-btn1 b "><a class="logout login-btn" href="/user/signin">Login</a></button>
-          <span id="hamburger-btn" class="material-symbols-outlined">menu</span>
-        </div>
-        <% } %>
-  </div>
-</nav>
-
-<% if (locals.error) { %>
-  <div class="container mt-4">
-    <div class="alert alert-danger" role="alert">
-      <%= locals.error %>
+<header>
+  <nav class="navbar">
+    <div class="div-img">
+      <img src="\images\image.png" class="head-img">
+      <h3>Park My Spot</h3>
     </div>
-  </div>
-  <% } %>
+    <div class="navbar-div1">
+      <ul class="menu-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#About">About us</a></li>
+        <li><a class="alast" href="#Contact">Contact us</a></li>
+        <% if (locals.user) { %>
+          <button class="book nav-btn2 b "><a href="/user/reservations"
+              class="logout login-btn">Reservations</a></button>
+          <% } %>
+            <span id="close-menu-btn" class="material-symbols-outlined">close</span>
+      </ul>
+
+    </div>
+    <div class="navbar-div2">
+      <div class="div-btn">
+        <% if (locals.user) { %>
+          <div class="div-btn">
+            <button class="book nav-btn1 b "><a href="/user/logout" class="logout login-btn">LOG OUT</a></button>
+            <!-- <button class="book nav-btn2 b "><a href="/user/reservations"
+                class="logout login-btn">Reservations</a></button> -->
+            <span id="hamburger-btn" class="material-symbols-outlined">menu</span>
+
+          </div>
+          <% } else {%>
+            <div class="div-btn">
+              <button class="book nav-btn1 b "><a class="logout login-btn" href="/user/signup">Register</a></button>
+              <button class="book nav-btn1 b "><a class="logout login-btn" href="/user/signin">Login</a></button>
+              <span id="hamburger-btn" class="material-symbols-outlined">menu</span>
+            </div>
+            <% } %>
+      </div>
+
+  </nav>
+
+</header>
