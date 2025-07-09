@@ -45,8 +45,8 @@ router.get("/Availibility", async (req, res) => {
 
   try {
     const search = req.query.search || "";
-    const limit = parseInt(req.query.limit) || 5;
-    const page = parseInt(req.query.page) - 1 || 0;
+    // const limit = parseInt(req.query.limit) || 5;
+    // const page = parseInt(req.query.page) - 1 || 0;
 
     const park = await Parking.find({ address: { $regex: search, $options: "i" } })
 
@@ -141,7 +141,9 @@ router.post("/Reservation", async (req, res) => {
       TP,
       "Arriving =" + startTime,
       "Leaving =" + endTime,
-      startDate
+      startDate,
+      STT,
+      ETT
     );
 
     // console.log(STT, ETT);
@@ -243,7 +245,9 @@ router.post("/signin", async (req, res) => {
   const { email, password } = req.body;
   const email2 = req.body.email; // Assuming you retrieve the username from the login form
   const response = await User.findOne({ email: email2 });
-  const userData = { username: response.fullName, email: response.email };
+  console.log(response, req.body);
+
+  const userData = { email: response.email };
   // Store user data in the session
   req.session.userData = userData;
 

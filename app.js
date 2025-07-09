@@ -19,7 +19,7 @@ const PORT = process.env.PORT || 8000;
 
 mongoose.set('strictQuery', true);
 mongoose
-  .connect("mongodb+srv://admin:1234@api.w1sen0x.mongodb.net/?retryWrites=true&w=majority")
+  .connect("mongodb+srv://admin:1234@api.w1sen0x.mongodb.net/Parking?retryWrites=true&w=majority")
   .then((e) => console.log("MongoDB Connected"));
 
 app.set("view engine", "ejs");
