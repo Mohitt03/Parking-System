@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parking Listings</title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <style>
+        /* Layout */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            display: flex;
+        }
+
+        .layout {
+            display: flex;
+            width: 100%;
+            height: 100vh;
+        }
+
+        /* Left Sidebar with scroll */
+        .sidebar {
+            width: 350px;
+            background: #fafafa;
+            border-right: 1px solid #ddd;
+            padding: 15px;
+            overflow-y: auto;
+            /* <-- adds scrollbar */
+        }
+
+        .sidebar h2 {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        .parking-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        /* Cards */
+        .card {
+            display: flex;
+            align-items: flex-start;
+            background: #fff;
+            border-radius: 8px;
+            padding: 12px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            justify-content: space-between;
+        }
+
+        .card-img {
+            width: 100px;
+            height: 80px;
+            border-radius: 6px;
+            object-fit: cover;
+            margin-right: 10px;
+        }
+
+        .card-info {
+            flex: 2;
+        }
+
+        .card-info h3 {
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .address {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .walk {
+            font-size: 12px;
+            color: #999;
+            margin-top: 4px;
+        }
+
+        .card-action {
+            text-align: right;
+            flex: 1;
+        }
+
+        .price {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 2px;
+        }
+
+        .time {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .btn {
+            padding: 5px 8px;
+            border: none;
+            border-radius: 5px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .btn.details {
+            background: #eee;
+            color: #333;
+        }
+
+        .btn.reserve {
+            background: black;
+            color: white;
+        }
+
+        /* Right main content */
+        .main-content {
+            flex: 1;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="layout">
+
+        <!-- Left column: Parking list -->
+        <div class="sidebar">
+            <h2>Parking lots nearby New York City</h2>
+            <div class="parking-list">
+
+                <!-- Card 1 -->
+                <div class="card">
+                    <img src="https://via.placeholder.com/100x80" alt="Parking Image" class="card-img">
+                    <div class="card-info">
+                        <h3>2 WASHINGTON SQUARE VILLAGE</h3>
+                        <p class="address">Entrance: 3 Washington Square Village</p>
+                        <p class="walk">15 min walk</p>
+                    </div>
+                    <div class="card-action">
+                        <p class="price">$22.21</p>
+                        <p class="time">For 0.5 hrs</p>
+                        <div class="btn-group">
+                            <button class="btn details">Details</button>
+                            <button class="btn reserve">Reserve space</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="card">
+                    <img src="https://via.placeholder.com/100x80" alt="Parking Image" class="card-img">
+                    <div class="card-info">
+                        <h3>(M) 18 MORTON ST.</h3>
+                        <p class="address">Entrance: 18 Morton Street</p>
+                        <p class="walk">17 min walk</p>
+                    </div>
+                    <div class="card-action">
+                        <p class="price">$31.72</p>
+                        <p class="time">For 0.5 hrs</p>
+                        <div class="btn-group">
+                            <button class="btn details">Details</button>
+                            <button class="btn reserve">Reserve space</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="card">
+                    <img src="https://via.placeholder.com/100x80" alt="Parking Image" class="card-img">
+                    <div class="card-info">
+                        <h3>(M) 60 EAST 12TH STREET</h3>
+                        <p class="address">Entrance: 60 E 12th St</p>
+                        <p class="walk">23 min walk</p>
+                    </div>
+                    <div class="card-action">
+                        <p class="price">$13.66</p>
+                        <p class="time">For 0.5 hrs</p>
+                        <div class="btn-group">
+                            <button class="btn details">Details</button>
+                            <button class="btn reserve">Reserve space</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Right column: Placeholder for map or other content -->
+        <div class="main-content">
+            <h2>Map / Other Content</h2>
+            <p>This area can hold a map, filters, or anything else.</p>
+        </div>
+
+    </div>
+</body>
+
+</html>

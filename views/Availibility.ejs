@@ -5,7 +5,12 @@
     <title>Park My Spot</title>
 
     <link rel="stylesheet" href="..\css\Availibility.css" type="text/css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,53 +20,88 @@
 
     <body>
 
-            <% if (parkings.length===0) { %>
-                <h1>Item not found</h1>
-                <% } else { %>
-                    <section class="sec1">
+        <section class="sec1">
 
+
+            <div class="sec1-div1">
+                <% if (parkings.length===0) { %>
+                    <h1>Item not found</h1>
+                    <% } else { %>
                         <% parkings.forEach(parking=> { %>
 
-                            <div class="sec1-div1">
-
-                                <div class="sec1-div2">
-                                    <div class="inner-head-div1">
-                                        <div class="head1">
-                                            <h1>
-                                                <%=parking.address%>
-                                            </h1>
-                                        </div>
-                                        <div class="head2">
-                                            <h1>
-                                                <%=parking.total_spot %> spots
-                                            </h1>
-                                        </div>
-
+                            <div class="sec1-div2">
+                                <div class="inner-head-div1">
+                                    <div class="head1">
+                                        <h1>
+                                            <%=parking.address%>
+                                        </h1>
                                     </div>
-                                    <div class="inner-head-div2">
-                                        <div>
-                                            <p class="sec1-div1-p">
-                                                ₹<%=parking.Reservation_Price%><br>
-                                                    1 hours
-                                            </p>
-                                        </div>
-
-                                        <div>
-                                            <h3 class="sec1-div1-h3 link2"><a href="/user/seemore/<%=parking._id %>"
-                                                    class="sec1-div1-h3-a">Park
-                                                    here </a></h3>
-                                        </div>
+                                    <div class="head2">
+                                        <h1>
+                                            <%=parking.total_spot %> spots
+                                        </h1>
                                     </div>
-
 
                                 </div>
+                                <div class="inner-head-div2">
+                                    <div>
+                                        <p class="sec1-div1-p">
+                                            ₹<%=parking.Reservation_Price%><br>
+                                                1 hours
+                                        </p>
+                                    </div>
+
+                                    <div>
+                                        <h3 class="sec1-div1-h3 link2"><a href="/user/seemore/<%=parking._id %>"
+                                                class="sec1-div1-h3-a">Park
+                                                here </a></h3>
+                                    </div>
+                                </div>
+
+
                             </div>
-
                             <% }); %>
+                                <% } %>
+            </div>
+            <div>
 
-                    </section>
-                    <% } %>
+                <div id="map"></div>
+            </div>
 
+        </section>
+
+        <script>
+            var map = L.map('map').setView([21.186393, 72.824685], 13);
+
+
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(map);
+
+            var marker = L.marker([21.183743, 72.817150]).addTo(map);
+            // Custom popup with card layout
+            marker.bindPopup(`
+  <div style="width:220px; font-family:Arial; text-align:center;">
+    <img src="https://via.placeholder.com/200x120.png?text=Parking" 
+         alt="Parking" 
+         style="width:100%; border-radius:8px; margin-bottom:8px;">
+    <h4 style="margin:5px 0;">My Parking Spot</h4>
+    <p>Near XYZ Street<br/>Price: <b>$20</b> for 5 hrs</p>
+    <button onclick="alert('Reserved successfully!')" 
+            style="background:black; color:white; padding:6px 12px; border:none; border-radius:5px; cursor:pointer;">
+      Reserve Space
+    </button>
+  </div>
+`); 
+
+            // var circle = L.circle([51.508, -0.11], {
+            //     color: 'red',
+            //     fillColor: '#f03',
+            //     fillOpacity: 0.5,
+            //     radius: 500
+            // }).addTo(map);
+        </script>
     </body>
 
 </html>

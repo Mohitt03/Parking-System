@@ -217,30 +217,53 @@ router.post("/Booking", async (req, res) => {
 })
 
 
-router.get("/invoice/:id", async (req, res) => {
+// router.get("/invoice/:id", async (req, res) => {
 
-  const template = fs.readFileSync('./views/Invoice.ejs', 'utf-8');
+//   const template = fs.readFileSync('./views/Invoice.ejs', 'utf-8');
 
-  // Compile the template
-  const compiledTemplate = ejs.compile(template);
+//   // Compile the template
+//   const compiledTemplate = ejs.compile(template);
 
-  // Example data (replace with your actual data)
-  const reservation = await Reservation.findById(req.params.id)
-  // Generate the HTML string
-  const invoiceHtml = compiledTemplate(reservation);
+//   // Example data (replace with your actual data)
+//   const reservation = await Reservation.findById(req.params.id)
+//   // Generate the HTML string
+//   const invoiceHtml = compiledTemplate(reservation);
 
-  // Generate PDF from HTML
-  pdf.create(invoiceHtml).toStream((err, stream) => {
-    if (err) {
-      res.status(500).send('Error generating PDF');
-    } else {
-      res.setHeader('Content-Type', 'application/pdf');
-      res.setHeader('Content-Disposition', 'attachment; filename="invoice.pdf"');
-      stream.pipe(res);
-    }
-  });
-});
+//   // Generate PDF from HTML
+//   pdf.create(invoiceHtml).toStream((err, stream) => {
+//     if (err) {
+//       res.status(500).send('Error generating PDF');
+//     } else {
+//       res.setHeader('Content-Type', 'application/pdf');
+//       res.setHeader('Content-Disposition', 'attachment; filename="invoice.pdf"');
+//       stream.pipe(res);
+//     }
+//   });
+// });
 
+
+
+// router.get("/invoice/:id", async (req, res) => {
+//   try {
+
+//     const fildId = req.params.id;
+//     const file = await Reservation.findById(fildId)
+//     if (!file) {
+//       return res.status(404).send("File Not Found")
+//     }
+
+//     // Headers for downloading
+//     res.set({
+//       'content-Type': 'application/pdf',
+//       'content-Disposition' : `attachment; filename${file.Username}`
+//     })
+
+//     return res.send(file.)
+
+//   } catch (error) {
+//     res.status(500).send("Error downloading file")
+//   }
+// });
 router.post("/signin", async (req, res) => {
   const { email, password } = req.body;
   const email2 = req.body.email; // Assuming you retrieve the username from the login form

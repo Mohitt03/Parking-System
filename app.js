@@ -7,12 +7,12 @@ const cookiePaser = require("cookie-parser");
 
 // const Blog = require("./models/blog");
 
-const userRoute = require("./routes/user");
-const adminRoute = require("./routes/admin");
+const userRoute = require("./src/routes/user");
+const adminRoute = require("./src/routes/admin");
 
 const {
   checkForAuthenticationCookie,
-} = require("./middlewares/authentication");
+} = require("./src/middlewares/authentication");
 
 const app = express();
 const PORT = process.env.PORT || 8000;
