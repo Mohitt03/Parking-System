@@ -1,6 +1,11 @@
 const mongoose = require('mongoose')
+const Parking = require('../models/Parking')
 const Schema = mongoose.Schema
 var Parking_Reservation = new Schema({
+    Parking_Id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Parking" // Reference to Parking
+    },  
     Username: {
         type: String,
         required: true

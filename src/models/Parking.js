@@ -2,8 +2,8 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 var Parking = new Schema({
 
-    parking_number: {
-        type: Number,
+    parking_name: {
+        type: String,
         required: true
     },
     address: {
@@ -37,6 +37,10 @@ var Parking = new Schema({
     Reservation_Price: {
         type: Number,
         required: true
+    },
+    Location: {
+        lng: { type: String, require: true },
+        lat: { type: String, require: true }
     },
     Features: {
         type: String,

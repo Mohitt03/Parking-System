@@ -24,7 +24,6 @@
 
     <table>
         <tr>
-            <th>Parking Number</th>
             <th>ID</th>
             <th>Address</th>
             <th>Map Link</th>
@@ -37,13 +36,12 @@
             <th>Price</th>
             <th>Reservation Price</th>
             <th>Features</th>
+            <th>Longitude</th>
+            <th>Latitude</th>
             <th><a href="/admin/create">Create Parking</a></th>
         </tr>
         <% datas.forEach(data=> { %>
             <tr>
-                <td>
-                    <%= data.parking_number %>
-                </td>
                 <td>
                     <%= data._id %>
                 </td>
@@ -81,6 +79,12 @@
                 </td>
                 <td>
                     <%= data.Features %>
+                </td>
+                <td>
+                    <%= data.Location.lng %>
+                </td>
+                <td>
+                    <%= data.Location.lat %>
                 </td>
                 <td>
                     <a class="delete" href="/admin/parking/<%= data._id %>">Delete</a>

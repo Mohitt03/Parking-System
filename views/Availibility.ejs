@@ -52,12 +52,15 @@
                                     </div>
 
                                     <div>
-                                        <h3 class="sec1-div1-h3 link2"><a href="/user/seemore/<%=parking._id %>"
+                                        <h3 class="sec1-div1-h3 link2"><a href="/user/booking/<%=parking._id %>"
                                                 class="sec1-div1-h3-a">Park
                                                 here </a></h3>
+                                        <h3 class="sec1-div1-h3 link2"><a href="/user/seemore/<%=parking._id %>"
+                                                class="sec1-div1-h3-a">See More
+                                            </a></h3>
                                     </div>
                                 </div>
-
+                                <% console.log(parking.Location); %>
 
                             </div>
                             <% }); %>
@@ -71,7 +74,7 @@
         </section>
 
         <script>
-            var map = L.map('map').setView([21.186393, 72.824685], 13);
+            var map = L.map('map').setView([21.186393, 72.824685], 14);
 
 
             L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -79,28 +82,22 @@
                 attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
             }).addTo(map);
 
-            var marker = L.marker([21.183743, 72.817150]).addTo(map);
-            // Custom popup with card layout
-            marker.bindPopup(`
-  <div style="width:220px; font-family:Arial; text-align:center;">
-    <img src="https://via.placeholder.com/200x120.png?text=Parking" 
-         alt="Parking" 
-         style="width:100%; border-radius:8px; margin-bottom:8px;">
-    <h4 style="margin:5px 0;">My Parking Spot</h4>
-    <p>Near XYZ Street<br/>Price: <b>$20</b> for 5 hrs</p>
-    <button onclick="alert('Reserved successfully!')" 
-            style="background:black; color:white; padding:6px 12px; border:none; border-radius:5px; cursor:pointer;">
-      Reserve Space
-    </button>
-  </div>
-`); 
+            var parkings = <%- JSON.stringify(parkings || []) %>;
 
-            // var circle = L.circle([51.508, -0.11], {
-            //     color: 'red',
-            //     fillColor: '#f03',
-            //     fillOpacity: 0.5,
-            //     radius: 500
-            // }).addTo(map);
+
+            var markers = [];
+
+            parkings.forEach(parking => {
+                var marker = L.marker([parking.Location.lng, parking.Location.lat])
+                    .addTo(map)
+                // .bindPopup(parking.name || "Parking Spot");
+
+                markers.push(marker);
+            });
+
+            // Example: open first marker’s popup
+            markers[0].openPopup();
+
         </script>
     </body>
 

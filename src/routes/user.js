@@ -9,6 +9,11 @@ const router = Router();
 const fs = require('fs');
 const ejs = require('ejs');
 const { createVerify } = require("crypto");
+const jwt = require('jsonwebtoken')
+const bcrypt = require('bcryptjs');
+const cookieParser = require('cookie-parser')
+
+router.use(cookieParser());
 
 router.use(require("express-session")({
   secret: "Rusty is a dog",
@@ -41,6 +46,20 @@ function requireLogin(req, res, next) {
   }
 }
 
+
+
+function authMiddleware(req, res, next) {
+  const token = req.cookies.token; // 👈 express will parse cookies if you use cookie-parser
+  if (!token) return res.status(401).json({ message: "Not authenticated" });
+
+  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+    if (err) return res.status(403).json({ message: "Invalid token" });
+    req.user = decoded; // now available in other routes
+    next();
+  });
+}
+
+
 router.get("/Availibility", async (req, res) => {
 
   try {
@@ -52,6 +71,7 @@ router.get("/Availibility", async (req, res) => {
 
     return res.render("Availibility", { parkings: park });
   } catch (err) {
+    console.log(err)
     res.status(500).json({ error: true, message: "Internal Server Error" });
   }
 });
@@ -61,34 +81,49 @@ router.get("/seemore/:id", async (req, res) => {
     const parking = await Parking.findById(req.params.id);
     return res.render("seemore", { parking });
   } catch (error) {
+    console.log(error)
     res.status(500).json({ message: "error" });
   }
 });
 
+
+router.get('/Spot/:id', async (req, res) => {
+  try {
+    const data = await Reservation.findById(req.params.id, { spot: 1 })
+    res.json(data)
+  } catch (error) {
+    console.log(error);
+  }
+})
+
 router.get("/booking/:id", requireLogin, async (req, res) => {
 
-  let currentDate = `${day}-${month}-${year}`;
+  try {
+    let currentDate = `${day}-${month}-${year}`;
 
-  const parking = await Parking.findById(req.params.id);
-  req.session.parking = parking;
+    const parking = await Parking.findById(req.params.id)
+    const data = await Reservation.findById(parking.id, { spot: 1, _id: 0 })
+    console.log(parking.id, data);
 
+    let token = req.cookies.token;
+    const user = jwt.verify(token, process.env.JWT_SECRET);
 
+    return res.render("booking",
+      {
+        parking,
+        id: parking._id,
+        currentDate,
+        email: user.email,
+        data
+      });
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ error: true, message: "Internal Server Error" });
 
-  const userData = req.session.userData;
-  const email = userData.email
-  return res.render("booking",
-    {
-      parking,
-      currentDate,
-      email: email
-    });
-
-
-
-
+  }
 });
 
-router.post("/Reservation", async (req, res) => {
+router.post("/Reservation/:id", async (req, res) => {
   try {
     const Price = req.session.parking.Reservation_Price;
     const Restaurant = await Reservation.findOne({ restaurant: req.body.restaurant });
@@ -148,7 +183,8 @@ router.post("/Reservation", async (req, res) => {
 
     // console.log(STT, ETT);
 
-    const userData = req.session.userData;
+    const userData = localStorage.getItem("email");
+    ;
     const email = userData.email
     res.render("Reservationproc1", {
       TotalTime: TT,
@@ -264,33 +300,84 @@ router.post("/Booking", async (req, res) => {
 //     res.status(500).send("Error downloading file")
 //   }
 // });
-router.post("/signin", async (req, res) => {
-  const { email, password } = req.body;
-  const email2 = req.body.email; // Assuming you retrieve the username from the login form
-  const response = await User.findOne({ email: email2 });
-  console.log(response, req.body);
 
-  const userData = { email: response.email };
-  // Store user data in the session
-  req.session.userData = userData;
+// router.post("/signin", async (req, res) => {
+//   const { email, password } = req.body;
+//   const email2 = req.body.email; // Assuming you retrieve the username from the login form
+//   // const response = await User.findOne({ email: email2 });
+//   // console.log(response, req.body);
+
+//   // const userData = { email: response.email };
+
+//   // Save an email in localStorage
+//   // localStorage.setItem(user);  
+
+//   try {
+//     const token = await User.matchPasswordAndGenerateToken(email, password);
+
+//     // Redirect to the original page
+//     const returnTo = req.session.returnTo || '/';
+//     delete req.session.returnTo; // Clear the saved URL
+//     return res.cookie("token", token).redirect(returnTo);
+//   } catch (error) {
+//     return res.render("signin", {
+//       error: "Incorrect Email or Password",
+//     });
+//   }
+// });
+
+
+
+router.post('/signin', async (req, res) => {
+  const { email, username, phoneNumber, password } = req.body;
 
   try {
+    // Find user by email, username, or phone number
+    const user = await User.findOne({
+      $or: [{ email }, { username }, { phoneNumber }]
+    });
+    console.log(phoneNumber, user);
+
+    if (!user) return res.status(400).json({ message: 'User not found' });
+
+    // Compare password 
+    // matchPasswordAndGenerateToken IS  MONGODB STATIC METHOD Check this method in user model
     const token = await User.matchPasswordAndGenerateToken(email, password);
 
+    if (!token) return res.status(400).json({ message: 'Invalid credentials' });
+    console.log(token);
+
+
+    // Set token in cookies
+    res.cookie('token', token, {
+      maxAge: 24 * 60 * 60 * 1000, // 1 day
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production', // Secure in production
+      sameSite: "lax"
+    });
+    // Redirect to the original page
     const returnTo = req.session.returnTo || '/';
     delete req.session.returnTo; // Clear the saved URL
     return res.cookie("token", token).redirect(returnTo);
-  } catch (error) {
+  } catch (err) {
+
+    console.error(err);
+
     return res.render("signin", {
       error: "Incorrect Email or Password",
     });
+    // console.error(err);
+    // res.status(500).json({ message: 'Server error' });
   }
 });
 
 
+
+
 // History of reservations
 router.get("/reservations", async (req, res) => {
-  const userData = req.session.userData;
+  const userData = localStorage.getItem("email");
+  ;
   const history = await Reservation.find({ Email: userData.email })
   return res.render("history", { datas: history });
 

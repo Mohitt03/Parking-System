@@ -16,7 +16,6 @@
 
     <% if (locals.parking) { %>
       <form id="newPostForm" action="/admin/edit/<%= parking._id %>" method="post">
-        <input type="text" name="parking_number" placeholder="Parking number" value="<%= parking.parking_number %>">
         <input type="text" name="address" placeholder="Address" input value="<%= parking.address %>">
         <input type="text" name="link" placeholder="Map Link" value="<%= parking.link %>">
         <input type="text" name="iframe_link" placeholder="Iframe link" value="<%= parking.iframe_link %>">
@@ -26,6 +25,8 @@
         <input type="text" name="Price" placeholder="Price" value="<%= parking.Price %>">
         <input type="text" name="Reservation_Price" placeholder="Reservation Price" value="<%= parking.Reservation_Price %>">
         <input type="text" name="Features" placeholder="Features spot" value="<%= parking.Features %>">
+        <input type="text" name="Location.lng" placeholder="Longitude" value="<%= parking.Location.lng %>">
+        <input type="text" name="Location.lat" placeholder="Latitude" value="<%= parking.Location.lat  %>">
         <button class="full-width" type="submit">
           <%= submit %>
         </button>
@@ -33,7 +34,6 @@
       <% } else{%>
         <form id="newPostForm" action="/admin/create" method="post">
 
-          <input type="text" name="parking_number" placeholder="Parking number">
           <input type="text" name="address" placeholder="Address" input>
           <input type="text" name="link" placeholder="Map Link">
           <input type="text" name="iframe_link" placeholder="Iframe link">
@@ -43,6 +43,8 @@
           <input type="text" name="Price" placeholder="Price">
           <input type="text" name="Reservation_Price" placeholder="Reservation Price">
           <input type="text" name="Features" placeholder="Features spot">
+          <input type="text" name="Location.lng" placeholder="Longitude">
+          <input type="text" name="Location.lat" placeholder="Latitude">
           <button class="full-width" type="submit">
             <%= submit %>
           </button>

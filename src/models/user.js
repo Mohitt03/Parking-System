@@ -66,6 +66,9 @@ userSchema.static(
       throw new Error("Incorrect Password");
 
     const token = createTokenForUser(user);
+
+
+
     return token;
   }
 );
