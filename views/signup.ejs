@@ -2,39 +2,75 @@
 <html lang="en">
 
 <head>
+  
   <%- include('./partials/head') %>
+  
     <title>Signup</title>
 </head>
 
 <body>
-  <%- include('./partials/nav') %>
+  <!-- <%- include('./partials/nav') %> -->
 
 
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6 d-none d-md-block">
+        <div class="register-page-img">
+          <!-- <img src="https://images.unsplash.com/photo-1562426509-5044a121aa49?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzV8fHBhcmtpbmd8ZW58MHx8MHx8fDA%3D" alt="Signup Image" class="img-fluid">
+           -->
+          <swiper-container class="mySwiper" space-between="30" centered-slides="true" autoplay-delay="5500"
+            effect="fade" autoplay-disable-on-interaction="false">
+            <swiper-slide> <img
+                src="https://images.unsplash.com/photo-1562426509-5044a121aa49?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzV8fHBhcmtpbmd8ZW58MHx8MHx8fDA%3D"
+                alt="Signup Image" class="img-fluid">
+            </swiper-slide>
+            <swiper-slide> <img src="https://images.pexels.com/photos/1000633/pexels-photo-1000633.jpeg" alt="parking-2"
+                class="img-fluid"> </swiper-slide>
+            <swiper-slide><img src="https://images.pexels.com/photos/9799756/pexels-photo-9799756.jpeg"
+                class="img-fluid" alt="park-3"></swiper-slide>
+          </swiper-container>
 
-
-    <div class="form-box signup center">
-      <div class="form-content">
-        <h2>Register</h2>
-        <form action="/user/signup" method="POST">
-          <div class="input-field">
-            <input type="text"  id="fullName" name="fullName" aria-describedby="fullName" placeholder="Full Name" required>
-          </div>
-          <div class="input-field">
-            <input type="email" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email" required>
-          </div>
-          <div class="input-field">
-            <input type="password" name="password" placeholder="Password" id="exampleInputPassword1" required>
-          </div>
-          <button  type="submit">Submit</button>
-          <!-- <button type="submit">Sign Up</button> -->
-        </form>
-        <div class="bottom-link">
-          Already have an account?
-          <a href="/login" id="login-link">Login</a>
         </div>
       </div>
+
+      <div class="col-md-6">
+          <div class="form-box signup ">
+            <div class="form-head">
+              <h2>JOIN PARKSMART AND TAKE <br> CONTROL OF PARKING</h2>
+              <h6>Simplify parking with real-time booking, <br> secure access, and easy management.</h6>
+            </div>
+            <div class="form-content">
+              <form action="/user/signup" method="POST">
+
+                <div class="input-field">
+                  <label for="fullName">Full Name </label>
+               <input type="text"  id="fullName" name="fullName" aria-describedby="fullName" placeholder="Full Name" required>
+                </div>
+
+                <div class="input-field">
+                  <label for="exampleInputEmail1">Email Address</label>
+                  <input type="email" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your email address" required>
+                </div>
+
+                <div class="input-field">
+                  <label for="exampleInputPassword1">Password </label>
+                  <input type="password" name="password" placeholder="Enter your password" id="exampleInputPassword1" required>
+                </div>
+                <button type="submit">Submit</button>
+                <!-- <button type="submit">Sign Up</button> -->
+              </form>
+              <div class="bottom-link">
+                Already have an account?
+                <a href="/user/signin" id="login-link">Login</a>
+              </div>
+            </div>
+          </div>
+      </div>
     </div>
-    <%- include('./partials/scripts') %>
+  </div>
+
+
+  <%- include('./partials/scripts') %>
 </body>
 
 </html>

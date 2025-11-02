@@ -30,6 +30,10 @@ router.get("/signup", (req, res) => {
   return res.render("signup");
 });
 
+router.get("/explore", async (req, res) => {
+  return res.render("explore");
+})
+
 // Middleware to check if the user is authenticated
 function requireLogin(req, res, next) {
   if (!req.user) {
@@ -101,9 +105,6 @@ router.post("/Reservation", async (req, res) => {
 
     const STT = startDate + startTime;
     const ETT = startDate + endTime;
-    console.log(req.body);
-
-    console.log(STT, ETT);
 
     // Time, Price, Discount Calculator
     function getTimeDifference(STT, ETT, Price) {
@@ -132,7 +133,7 @@ router.post("/Reservation", async (req, res) => {
         TT += `${minutes} minute${minutes > 1 ? "s" : ""} `;
       }
       if (minutes) {
-        // console.log("Discount");
+        console.log("Discount");
 
       }
       TP = Price * hours;

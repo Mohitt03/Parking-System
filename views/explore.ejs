@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('./partials/head') %>
+    <title>Park My Spot</title>
+
+</head>
+
+<body>
+  <%- include('./partials/nav') %>
+
+
+
+    <section class="sec1">
+      <div class="sec1-div1">
+        <div class="sec1-div2">
+          <form action="/user/Availibility">
+            <h1 class="sec1-h1">Where You Want To Go ?</h1>
+            <input class="sec1-inp1" id="searchBar" name="search" type="text" placeholder="Search...">
+            <br>
+            <div class="inp-class">
+              <input class="home-inp" type="submit" value="Search">
+            </div>
+          </form>
+        </div>
+        <div>
+        </div>
+      </div>
+    </section>
+    
+</body>
+</html>
