@@ -178,6 +178,15 @@ nav {
     padding: 10px 0;
 }
 
+
+.explore-section {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	height: 90vh;
+	padding: 100px 0;
+}
 .logo-container img{
 	width: 48px;
 }
