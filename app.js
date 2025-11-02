@@ -31,12 +31,14 @@ app.use(checkForAuthenticationCookie("token"));
 // app.use(express.static(path.resolve("./public")));
 
 app.get("/", async (req, res) => {
+  console.log(req.user);
+
   res.render("home", {
     user: req.user
   });
 });
 
-app.use("/user", userRoute);
+app.use("/user", userRoute);  
 app.use("/admin", adminRoute);
 
 app.listen(PORT, () => console.log(`Server Started at PORT:${PORT}`));

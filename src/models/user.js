@@ -20,9 +20,17 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    profileImageURL: {
-      type: String,
-      default: "/images/default.png",
+    profileImg: {
+      profileImageData: {
+        type: Buffer,
+      },
+      profileImageType: {
+        type: String,
+      },
+      profileImageURL: {
+        type: String, // fallback to default if no Buffer image exists
+        default: "/images/default.png",
+      },
     },
     role: {
       type: String,

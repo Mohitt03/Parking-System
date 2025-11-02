@@ -1,20 +1,25 @@
-const { Router } = require("express");
+const express = require("express");
+// const router = express.Router();
 const User = require("../models/user");
 const Parking = require("../models/Parking");
 const Reservation = require("../models/Active_Reservation");
 axios = require("axios")
 var session = require('express-session');
 const pdf = require('html-pdf');
-const router = Router();
+const router = express.Router();
 const fs = require('fs');
 const ejs = require('ejs');
 const { createVerify } = require("crypto");
+const multer = require("multer");
 
 router.use(require("express-session")({
   secret: "Rusty is a dog",
   resave: false,
   saveUninitialized: false
 }));
+router.use(express.json());
+router.use(express.urlencoded({ extended: true }));
+
 
 // Date
 const date = new Date();
@@ -31,7 +36,11 @@ router.get("/signup", (req, res) => {
 });
 
 router.get("/explore", async (req, res) => {
-  return res.render("explore");
+  console.log(req.user);
+
+  res.render("explore", {
+    user: req.user
+  });
 })
 
 // Middleware to check if the user is authenticated
@@ -272,7 +281,6 @@ router.post("/signin", async (req, res) => {
   const { email, password } = req.body;
   const email2 = req.body.email; // Assuming you retrieve the username from the login form
   const response = await User.findOne({ email: email2 });
-  console.log(response, req.body);
 
   const userData = { email: response.email };
   // Store user data in the session
@@ -313,5 +321,74 @@ router.post("/signup", async (req, res) => {
   });
   return res.redirect("/");
 });
+
+
+// Profile FullName edit
+router.put("/update-name/:id", async (req, res) => {
+  try {
+
+    const userId = req.params.id
+    const { fullName } = req.body;
+    console.log(userId, req.body);
+
+
+    if (!userId || !fullName) {
+      return res.status(400).json({ message: "userId and fullName are required" });
+    }
+
+    const user = await User.findByIdAndUpdate(
+      userId,
+      { fullName },
+      { new: true } // return updated user
+    );
+
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    res.json({
+      message: "Full name updated successfully",
+      user,
+    });
+  } catch (error) {
+    console.error("Error updating name:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+
+
+// Store file in memory as buffer
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
+
+// Profile Image edit
+router.put("/profile-image/:id", upload.single("profileImage"), async (req, res) => {
+  try {
+    const userId = req.params.id;
+
+    if (!userId || !req.file) {
+      return res.status(400).json({ message: "userId and profile image are required" });
+    }
+
+    const user = await User.findByIdAndUpdate(
+      userId,
+      {
+        profileImageData: req.file.buffer,
+        profileImageType: req.file.mimetype,
+      },
+      { new: true }
+    );
+
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    res.json({
+      message: "Profile image updated successfully",
+      user,
+    });
+  } catch (error) {
+    console.error("Error updating profile image:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
 
 module.exports = router;

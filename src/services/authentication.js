@@ -5,8 +5,9 @@ const secret = "$uperMan@123";
 function createTokenForUser(user) {
   const payload = {
     _id: user._id,
+    fullName:user.fullName,
     email: user.email,
-    profileImageURL: user.profileImageURL,
+    profileImg: user.profileImg,
     role: user.role,
   };
   const token = JWT.sign(payload, secret);
@@ -21,4 +22,4 @@ function validateToken(token) {
 module.exports = {
   createTokenForUser,
   validateToken,
-};
+};  
