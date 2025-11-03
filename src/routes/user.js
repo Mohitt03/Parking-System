@@ -90,7 +90,7 @@ router.get("/booking/:id", requireLogin, async (req, res) => {
 
 
 
-  const userData = req.session.userData;
+  const userData = req.user;
   const email = userData.email
   return res.render("booking",
     {
@@ -164,7 +164,7 @@ router.post("/Reservation", async (req, res) => {
 
     // console.log(STT, ETT);
 
-    const userData = req.session.userData;
+    const userData = req.user;
     const email = userData.email
     res.render("Reservationproc1", {
       TotalTime: TT,
@@ -283,11 +283,7 @@ router.post("/Booking", async (req, res) => {
 router.post("/signin", async (req, res) => {
   const { email, password } = req.body;
   const email2 = req.body.email; // Assuming you retrieve the username from the login form
-  const response = await User.findOne({ email: email2 });
 
-  const userData = { email: response.email };
-  // Store user data in the session
-  req.session.userData = userData;
 
 
   try {
@@ -306,7 +302,7 @@ router.post("/signin", async (req, res) => {
 
 // History of reservations
 router.get("/reservations", async (req, res) => {
-  const userData = req.session.userData;
+  const userData = req.user;
   const history = await Reservation.find({ Email: userData.email })
   return res.render("history", { datas: history });
 
@@ -405,6 +401,7 @@ router.post("/contact", async (req, res) => {
   if (!subject || !email || !message) {
     return res.status(400).json({ error: "All fields are required" });
   }
+
 
   try {
     // Create transporter
