@@ -11,6 +11,7 @@ const fs = require('fs');
 const ejs = require('ejs');
 const { createVerify } = require("crypto");
 const multer = require("multer");
+const nodemailer = require('nodemailer')
 
 router.use(require("express-session")({
   secret: "Rusty is a dog",
@@ -57,6 +58,8 @@ function requireLogin(req, res, next) {
 router.get("/Availibility", async (req, res) => {
 
   try {
+
+
     const search = req.query.search || "";
     // const limit = parseInt(req.query.limit) || 5;
     // const page = parseInt(req.query.page) - 1 || 0;
@@ -286,6 +289,7 @@ router.post("/signin", async (req, res) => {
   // Store user data in the session
   req.session.userData = userData;
 
+
   try {
     const token = await User.matchPasswordAndGenerateToken(email, password);
 
@@ -390,5 +394,44 @@ router.put("/profile-image/:id", upload.single("profileImage"), async (req, res)
   }
 });
 
+
+
+// Contact us form
+
+router.post("/contact", async (req, res) => {
+  const { subject, email, message } = req.body;
+  console.log(req.body);
+
+  if (!subject || !email || !message) {
+    return res.status(400).json({ error: "All fields are required" });
+  }
+
+  try {
+    // Create transporter
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
+
+    // Email options
+    const mailOptions = {
+      from: email,
+      to: process.env.EMAIL_USER,
+      subject: `Contact Form: ${subject}`,
+      text: `From: ${email}\n\n${message}`,
+    };
+
+    // Send mail
+    await transporter.sendMail(mailOptions);
+
+    res.status(200).json({ success: true, message: "Email sent successfully!" });
+  } catch (error) {
+    console.error("Error sending email:", error);
+    res.status(500).json({ success: false, error: "Email failed to send" });
+  }
+});
 
 module.exports = router;

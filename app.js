@@ -31,8 +31,6 @@ app.use(checkForAuthenticationCookie("token"));
 // app.use(express.static(path.resolve("./public")));
 
 app.get("/", async (req, res) => {
-  console.log(req.user);
-
   res.render("home", {
     user: req.user
   });
