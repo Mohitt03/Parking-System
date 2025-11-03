@@ -63,3 +63,39 @@ $(document).ready(function() {
               }
           });
 });
+
+
+
+  // Simple site loader hide: fade out the loader once the window finishes loading
+  window.addEventListener('load', function() {
+    const loader = document.getElementById('site-loader');
+    if (!loader) return;
+    // add hidden class to allow CSS transition (fade out)
+    loader.classList.add('hidden');
+    // remove from DOM after transition to avoid covering interactions
+    setTimeout(() => {
+      if (loader && loader.parentNode) loader.parentNode.removeChild(loader);
+    }, 450);
+  }, { passive: true });
+
+  (function(){
+      document.addEventListener('DOMContentLoaded', function(){
+        var toggles = document.querySelectorAll('[data-password-toggle]');
+        toggles.forEach(function(btn){
+          btn.addEventListener('click', function(){
+            var id = this.getAttribute('data-password-toggle');
+            var input = document.getElementById(id);
+            if(!input) return;
+            if(input.type === 'password'){
+              input.type = 'text';
+              this.textContent = 'Hide';
+              this.setAttribute('aria-pressed', 'true');
+            } else {
+              input.type = 'password';
+              this.textContent = 'Show';
+              this.setAttribute('aria-pressed', 'false');
+            }
+          });
+        });
+      });
+    })();

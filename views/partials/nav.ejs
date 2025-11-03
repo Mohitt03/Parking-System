@@ -1,3 +1,4 @@
+
 <header class="w-100">
 
 
@@ -16,11 +17,7 @@
             <li><a href="/user/explore">Explore</a></li>
 
             <li><a class="alast" href="#Contact">Contact us</a></li>
-            <% if (locals.user) { %>
-              <a href="/user/reservations" class="logout register-btn ">Reservations</a>
-              <h3><%- locals.user.fullName %></h3>
-              <img src="<%- locals.user.profileImg.profileImageURL %>" alt="" srcset="" style="    width: 63px;">
-              <% } %>
+          
           </ul>
 
         </div>
@@ -30,9 +27,18 @@
         <div class="">
           <% if (locals.user) { %>
             <div class="nav-btn-grp">
-              <a href="/user/logout" class="logout ">
-                <button class="book login-btn  ">LOG OUT</button> </a>
+
             </div>
+            <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              <img class="img-fluid profile-pic" src="<%- locals.user.profileImg.profileImageURL %>" alt="" srcset="">
+              <h6><%- locals.user.fullName %></h6>
+            </button>
+            <ul class="dropdown-menu">
+
+              <li> <a href="/user/reservations" class="logout  dropdown-item">Reservations</a></li>
+              <li> <a href="/user/logout" class="logout dropdown-item">LOG OUT </a></li>
+            </ul>
             <% } else {%>
               <div class="nav-btn-grp">
                 <a class="logout " href="/user/signup"> <button class="book register-btn  ">Register</button> </a>
@@ -44,4 +50,13 @@
     </div>
     </div>
 
+
 </header>
+
+<!-- Site loader: full-screen overlay shown while page resources load -->
+<div id="site-loader" class="site-loader">
+  <div class="site-loader__inner">
+    <div class="spinner" aria-hidden="true"></div>
+    <span class="site-loader__text">Loading...</span>
+  </div>
+</div>

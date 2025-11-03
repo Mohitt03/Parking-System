@@ -12,13 +12,17 @@
 
 
 
-  <section class="explore-section">
-    <div class="container text-center">
-      <div class="sec1-div2">
-        <form action="/user/Availibility">
-          <h1 class="sec1-h1">Where You Want To Go ?</h1>
-          <input class="sec1-inp1" id="searchBar" name="search" type="text" placeholder="Search...">
-          <br>
+    <section class="explore-section">
+      <div class="container text-center">
+        <div class="search-box-container">
+        <div class="search-box">
+          <form action="/user/Availibility">
+            <h1 class="sec1-h1">Where You Want To Go ?</h1>
+           <div class="search-input-container"  >
+            <div class="glow " ></div>
+            <input class=" search-input" id="searchBar" name="search" type="text" placeholder="Search...">
+           </div>
+            <br>
           <div class="inp-class">
             <input class="home-inp" type="submit" value="Search">
           </div>
@@ -27,8 +31,10 @@
       <div>
       </div>
     </div>
+    </div>
   </section>
 
+    <%- include('./partials/scripts') %>
 </body>
 
 </html>

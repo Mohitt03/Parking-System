@@ -23,6 +23,23 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Signin</title>
+  <style>
+    /* Small styles for show/hide password control on signin page */
+    .password-wrap { position: relative; }
+    .password-input { padding-right: 80px; }
+    .password-toggle {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-size: 0.95rem;
+      color: #111;
+      padding: 6px 8px;
+    }
+  </style>
 </head>
 
 <body>
@@ -69,7 +86,10 @@
 
               <div class="input-field">
                 <label for="exampleInputPassword1">Password </label>
-                <input type="password" name="password" placeholder="password" required id="exampleInputPassword1">
+                <div class="password-wrap">
+                  <input type="password" name="password" placeholder="password" required id="exampleInputPassword1" class="password-input">
+                  <button type="button" class="password-toggle" data-password-toggle="exampleInputPassword1" aria-pressed="false" aria-label="Show password">Show</button>
+                </div>
               </div>
               <button>Login</button>
               <!-- <button type="submit">Sign Up</button> -->
@@ -86,6 +106,7 @@
 
 
   <%- include('./partials/scripts') %>
+
 </body>
 
 </html>

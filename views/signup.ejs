@@ -2,14 +2,30 @@
 <html lang="en">
 
 <head>
-  
+
   <%- include('./partials/head') %>
-  
+
     <title>Signup</title>
+    <style>
+      /* Small styles for show/hide password control on signup page */
+      .password-wrap { position: relative; }
+      .password-input { padding-right: 80px; }
+      .password-toggle {
+        position: absolute;
+        right: 8px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        font-size: 0.95rem;
+        color: #111;
+        padding: 6px 8px;
+      }
+    </style>
 </head>
 
 <body>
-  <!-- <%- include('./partials/nav') %> -->
 
 
   <div class="container-fluid">
@@ -34,43 +50,50 @@
       </div>
 
       <div class="col-md-6">
-          <div class="form-box signup ">
-            <div class="form-head">
-              <h2>JOIN PARKSMART AND TAKE <br> CONTROL OF PARKING</h2>
-              <h6>Simplify parking with real-time booking, <br> secure access, and easy management.</h6>
-            </div>
-            <div class="form-content">
-              <form action="/user/signup" method="POST">
+        <div class="form-box signup ">
+          <div class="form-head">
+            <h2>JOIN PARKSMART AND TAKE <br> CONTROL OF PARKING</h2>
+            <h6>Simplify parking with real-time booking, <br> secure access, and easy management.</h6>
+          </div>
+          <div class="form-content">
+            <form action="/user/signup" method="POST">
 
-                <div class="input-field">
-                  <label for="fullName">Full Name </label>
-               <input type="text"  id="fullName" name="fullName" aria-describedby="fullName" placeholder="Full Name" required>
-                </div>
-
-                <div class="input-field">
-                  <label for="exampleInputEmail1">Email Address</label>
-                  <input type="email" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your email address" required>
-                </div>
-
-                <div class="input-field">
-                  <label for="exampleInputPassword1">Password </label>
-                  <input type="password" name="password" placeholder="Enter your password" id="exampleInputPassword1" required>
-                </div>
-                <button type="submit">Submit</button>
-                <!-- <button type="submit">Sign Up</button> -->
-              </form>
-              <div class="bottom-link">
-                Already have an account?
-                <a href="/user/signin" id="login-link">Login</a>
+              <div class="input-field">
+                <label for="fullName">Full Name </label>
+                <input type="text" id="fullName" name="fullName" aria-describedby="fullName" placeholder="Full Name"
+                  required>
               </div>
+
+              <div class="input-field">
+                <label for="exampleInputEmail1">Email Address</label>
+                <input type="email" name="email" id="exampleInputEmail1" aria-describedby="emailHelp"
+                  placeholder="Enter your email address" required>
+              </div>
+
+              <div class="input-field">
+                <label for="exampleInputPassword1">Password </label>
+                <div class="password-wrap">
+                  <input type="password" name="password" placeholder="Enter your password" id="exampleInputPassword1" class="password-input"
+                    required>
+                  <button type="button" class="password-toggle" data-password-toggle="exampleInputPassword1" aria-pressed="false" aria-label="Show password">Show</button>
+                </div>
+              </div>
+              <button type="submit">Submit</button>
+              <!-- <button type="submit">Sign Up</button> -->
+            </form>
+            <div class="bottom-link">
+              Already have an account?
+              <a href="/user/signin" id="login-link">Login</a>
             </div>
           </div>
+        </div>
       </div>
     </div>
   </div>
 
 
   <%- include('./partials/scripts') %>
+
 </body>
 
 </html>
