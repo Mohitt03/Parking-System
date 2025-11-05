@@ -37,6 +37,7 @@ var Parking_Reservation = new Schema({
         type: String,
         required: true
     },
+    isActive: { type: Boolean, default: true },
     Payment: {
         status: {
             type: String,
