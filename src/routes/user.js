@@ -5,13 +5,14 @@ const Parking = require("../models/Parking");
 const Reservation = require("../models/Active_Reservation");
 axios = require("axios")
 var session = require('express-session');
-const pdf = require('html-pdf');
+
 const router = express.Router();
 const fs = require('fs');
 const ejs = require('ejs');
 const { createVerify } = require("crypto");
 const multer = require("multer");
-const nodemailer = require('nodemailer')
+const nodemailer = require('nodemailer');
+const Active_Reservation = require("../models/Active_Reservation");
 
 router.use(require("express-session")({
   secret: "Rusty is a dog",
@@ -37,7 +38,7 @@ router.get("/signup", (req, res) => {
 });
 
 router.get("/explore", async (req, res) => {
-  console.log(req.user);
+  // console.log(req.user);
 
   res.render("explore", {
     user: req.user
@@ -87,6 +88,18 @@ router.get("/booking/:id", requireLogin, async (req, res) => {
 
   const parking = await Parking.findById(req.params.id);
   req.session.parking = parking;
+  const reservation = await Reservation.find({ address: parking.address })
+
+
+  const activeSpot = []
+
+  reservation.forEach(element => {
+    if (element.isActive === true) {
+      activeSpot.push(element.spot)
+      // console.log("Active Spot:-", activeSpot);
+    }
+  })
+
 
 
 
@@ -96,7 +109,8 @@ router.get("/booking/:id", requireLogin, async (req, res) => {
     {
       parking,
       currentDate,
-      email: email
+      email: email,
+      activeSpot
     });
 
 
@@ -233,53 +247,60 @@ router.post("/Booking", async (req, res) => {
 })
 
 
-// router.get("/invoice/:id", async (req, res) => {
+router.get("/invoice/:id", async (req, res) => {
 
-//   const template = fs.readFileSync('./views/Invoice.ejs', 'utf-8');
+  const template = fs.readFileSync('./views/Invoice.ejs', 'utf-8');
 
-//   // Compile the template
-//   const compiledTemplate = ejs.compile(template);
+  // Compile the template
+  const compiledTemplate = ejs.compile(template);
 
-//   // Example data (replace with your actual data)
-//   const reservation = await Reservation.findById(req.params.id)
-//   // Generate the HTML string
-//   const invoiceHtml = compiledTemplate(reservation);
+  // Example data (replace with your actual data)
+  const reservation = await Reservation.findById(req.params.id)
+  // Generate the HTML string
+  const invoiceHtml = compiledTemplate(reservation);
 
-//   // Generate PDF from HTML
-//   pdf.create(invoiceHtml).toStream((err, stream) => {
-//     if (err) {
-//       res.status(500).send('Error generating PDF');
-//     } else {
-//       res.setHeader('Content-Type', 'application/pdf');
-//       res.setHeader('Content-Disposition', 'attachment; filename="invoice.pdf"');
-//       stream.pipe(res);
-//     }
-//   });
-// });
+
+  pdf.create(invoiceHtml, { phantomPath: phantomjs.path }).toStream((err, stream) => {
+    if (err) {
+      return res.status(500).send('Error generating PDF');
+    }
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Disposition', 'attachment; filename="invoice.pdf"');
+    stream.pipe(res);
+  });
+});
 
 
 
 // router.get("/invoice/:id", async (req, res) => {
 //   try {
+//     const fileId = req.params.id;
+//     const reservation = await Reservation.findById(fileId);
+//     console.log("reservation", reservation);
 
-//     const fildId = req.params.id;
-//     const file = await Reservation.findById(fildId)
-//     if (!file) {
-//       return res.status(404).send("File Not Found")
+//     if (!reservation) {
+//       return res.status(404).send("File not found");
 //     }
 
-//     // Headers for downloading
-//     res.set({
-//       'content-Type': 'application/pdf',
-//       'content-Disposition' : `attachment; filename${file.Username}`
-//     })
+//     // Assuming your schema has a 'pdfData' field (Buffer)
+//     if (!reservation.pdfData) {
+//       return res.status(400).send("No PDF data found for this reservation");
+//     }
 
-//     return res.send(file.)
+//     res.set({
+//       'Content-Type': 'application/pdf',
+//       'Content-Disposition': `attachment; filename="${reservation.Username || "invoice"}.pdf"`
+//     });
+
+//     return res.send(reservation.pdfData);
 
 //   } catch (error) {
-//     res.status(500).send("Error downloading file")
+//     console.error("Error downloading file:", error);
+//     res.status(500).send("Error downloading file");
 //   }
 // });
+
+
 router.post("/signin", async (req, res) => {
   const { email, password } = req.body;
   const email2 = req.body.email; // Assuming you retrieve the username from the login form

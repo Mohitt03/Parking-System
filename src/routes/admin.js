@@ -1,4 +1,5 @@
 const { Router } = require("express");
+const cron = require("node-cron");
 
 axios = require("axios")
 
@@ -207,5 +208,38 @@ router.get("/admin2", async (req, res) => {
     });
 
 });
+
+
+
+
+// Checking the active and marking the unActive Parking Resesrvations
+
+// Run every minute
+cron.schedule("*/1 * * * *", async () => {
+    console.log("Checking for expired parking reservations...");
+
+    const now = new Date();
+
+    // Find all active reservations
+    const reservations = await Reservation.find({ isActive: true });
+
+    for (let reservation of reservations) {
+        try {
+            // Combine date and Leaving time into a full ISO string
+            const leavingDateTime = new Date(`${reservation.date}T${reservation.Leaving}:00`);
+
+            // Compare
+            if (leavingDateTime < now) {
+                reservation.isActive = false;
+                await reservation.save();
+                console.log(`Deactivated: ${reservation.Username} — left at ${reservation.Leaving}`);
+            }
+        } catch (err) {
+            console.error("Error checking reservation:", err);
+        }
+    }
+});
+
+
 
 module.exports = router;
