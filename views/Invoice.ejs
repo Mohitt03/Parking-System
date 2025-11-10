@@ -137,44 +137,44 @@
     <section>
         <div class="container-main">
             <div class="container1">
-                <h2>Price <span class="w">₹<%= Price %></span></h2>
+                <h2>Price <span class="w">₹<%= reservation.Price %></span></h2>
                 <h3>Time <span class="w">
-                        <%= Time %>
+                        <%= reservation.Time %>
                     </span></h3>
             </div>
             <div class="container2">
                 <h3 class="k">
-                    <%= date %>
+                    <%= reservation.date %>
                 </h3>
                 <h4 class="k2">
-                    <%= Arriving %> - <%= Leaving %>
+                    <%= reservation.Arriving %> - <%= reservation.Leaving %>
                 </h4>
             </div>
 
             <div class="container3">
                 <p>Parking Spot <span>
-                        <%= spot %>
+                        <%= reservation.spot %>
                     </span></p>
             </div>
 
             <div class="container4">
                 <h3>Parking Address</h3>
                 <p>
-                    <%= address %>
+                    <%= reservation.address %>
                 </p>
             </div>
             <div class="container5">
                 <h3>
-                    <%= Username %>
+                    <%= reservation.Username %>
                 </h3>
                 <h3>
-                    <%= Email %>
+                    <%= reservation.Email %>
                 </h3>
             </div>
             <div class="container6">
                 <h3>Payment Method</h3>
                 <h5>
-                    <%= Payment.Payment_Method %>
+                    <%= reservation.Payment.Payment_Method %>
                 </h5>
 
             </div>

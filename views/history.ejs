@@ -76,8 +76,14 @@
                             <%= data.Payment.status %>
                         </td>
                         <td>
+                            <a class="logout login-btn" href="/user/invoice/<%= data._id %>"><button
+                                    class="book nav-btn1 b ">View</button></a>
+
+                        </td>
+                        <td>
                             <!-- <a href=""></a> -->
-                            <button class="book nav-btn1 b "><a class="logout login-btn" href="/user/invoice/<%= data._id %>">Download Bill</a></button>
+                            <a class="logout login-btn" href="/user/download-invoice/<%= data._id %>"><button
+                                    class="book nav-btn1 b ">Download Bill</button></a>
 
                         </td>
                     </tr>

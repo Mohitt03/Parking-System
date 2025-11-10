@@ -5,10 +5,11 @@ const Parking = require("../models/Parking");
 const Reservation = require("../models/Active_Reservation");
 axios = require("axios")
 var session = require('express-session');
-
+const puppeteer = require("puppeteer");
 const router = express.Router();
 const fs = require('fs');
 const ejs = require('ejs');
+const path = require('path')
 const { createVerify } = require("crypto");
 const multer = require("multer");
 const nodemailer = require('nodemailer');
@@ -247,27 +248,41 @@ router.post("/Booking", async (req, res) => {
 })
 
 
+
+
+
+// Example route to render invoice page in browser
 router.get("/invoice/:id", async (req, res) => {
 
-  const template = fs.readFileSync('./views/Invoice.ejs', 'utf-8');
-
-  // Compile the template
-  const compiledTemplate = ejs.compile(template);
-
-  // Example data (replace with your actual data)
   const reservation = await Reservation.findById(req.params.id)
-  // Generate the HTML string
-  const invoiceHtml = compiledTemplate(reservation);
+  res.render("invoice", { reservation });
+});
+
+// Route to download invoice as PDF
+router.get("/download-invoice/:id", async (req, res) => {
+
+  const reservation = await Reservation.findById(req.params.id)
 
 
-  pdf.create(invoiceHtml, { phantomPath: phantomjs.path }).toStream((err, stream) => {
-    if (err) {
-      return res.status(500).send('Error generating PDF');
-    }
-    res.setHeader('Content-Type', 'application/pdf');
-    res.setHeader('Content-Disposition', 'attachment; filename="invoice.pdf"');
-    stream.pipe(res);
+  // Render EJS template to HTML string
+  const html = await ejs.renderFile("D:/Architect-Project/Parking-System/views/invoice.ejs", { reservation });
+
+  // Launch Puppeteer and generate PDF
+  const browser = await puppeteer.launch({ headless: true });
+  const page = await browser.newPage();
+  await page.setContent(html, { waitUntil: "networkidle0" });
+
+  const pdfBuffer = await page.pdf({
+    format: "A4",
+    printBackground: true,
   });
+
+  await browser.close();
+
+  // Set headers for download
+  res.setHeader("Content-Type", "application/pdf");
+  res.setHeader("Content-Disposition", `attachment; filename=${reservation._id}.pdf`);
+  res.send(pdfBuffer);
 });
 
 
